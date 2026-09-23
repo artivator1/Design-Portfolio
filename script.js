@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const body = document.body;
 
-  const intro = document.querySelector(".intro");
+  const intro = document.querySelector("#intro");
   const enterPortfolio = document.querySelector("#enterPortfolio");
   const skipIntro = document.querySelector("#skipIntro");
 
@@ -13,20 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.querySelector(".theme-toggle");
   const themeIcon = document.querySelector(".theme-icon");
 
-  const navLinks = document.querySelectorAll(".main-nav a");
   const revealElements = document.querySelectorAll(".reveal");
+  const navLinks = document.querySelectorAll(".main-nav a");
+
+  const services = document.querySelectorAll(".service-card");
 
 
-  /* INTRO EXPERIENCE */
+  /* INTRO */
 
   const introSeen = sessionStorage.getItem("portfolio-intro-seen");
 
 
   function closeIntro() {
 
-    if (!intro) {
-      return;
-    }
+    if (!intro) return;
 
     intro.classList.add("exit");
     body.classList.remove("intro-active");
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       intro.style.display = "none";
-    }, 1100);
+    }, 1300);
 
   }
 
@@ -49,27 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       closeIntro();
-    }, 6000);
+    }, 6500);
 
   }
 
 
-  if (enterPortfolio) {
-
-    enterPortfolio.addEventListener("click", () => {
-      closeIntro();
-    });
-
-  }
-
-
-  if (skipIntro) {
-
-    skipIntro.addEventListener("click", () => {
-      closeIntro();
-    });
-
-  }
+  enterPortfolio?.addEventListener("click", closeIntro);
+  skipIntro?.addEventListener("click", closeIntro);
 
 
   /* THEME */
@@ -84,11 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateThemeIcon() {
 
-    if (body.classList.contains("light")) {
-      themeIcon.textContent = "◐";
-    } else {
-      themeIcon.textContent = "◌";
-    }
+    themeIcon.textContent =
+      body.classList.contains("light")
+        ? "◐"
+        : "◌";
 
   }
 
@@ -96,22 +81,23 @@ document.addEventListener("DOMContentLoaded", () => {
   updateThemeIcon();
 
 
-  themeToggle.addEventListener("click", () => {
+  themeToggle?.addEventListener("click", () => {
 
     body.classList.toggle("light");
 
-    const theme = body.classList.contains("light")
-      ? "light"
-      : "dark";
-
-    localStorage.setItem("portfolio-theme", theme);
+    localStorage.setItem(
+      "portfolio-theme",
+      body.classList.contains("light")
+        ? "light"
+        : "dark"
+    );
 
     updateThemeIcon();
 
   });
 
 
-  /* CUSTOM CURSOR */
+  /* CURSOR */
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
@@ -120,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let cursorY = mouseY;
 
 
-  window.addEventListener("mousemove", (event) => {
+  window.addEventListener("mousemove", event => {
 
     mouseX = event.clientX;
     mouseY = event.clientY;
@@ -130,8 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function animateCursor() {
 
-    cursorX += (mouseX - cursorX) * 0.16;
-    cursorY += (mouseY - cursorY) * 0.16;
+    cursorX += (mouseX - cursorX) * .16;
+    cursorY += (mouseY - cursorY) * .16;
 
     cursor.style.left = `${cursorX}px`;
     cursor.style.top = `${cursorY}px`;
@@ -144,31 +130,68 @@ document.addEventListener("DOMContentLoaded", () => {
   animateCursor();
 
 
-  const interactiveElements = document.querySelectorAll(
-    "a, button, .project"
-  );
+  document
+    .querySelectorAll("a, button, .project, .service-card")
+    .forEach(element => {
+
+      element.addEventListener("mouseenter", () => {
+
+        if (
+          element.classList.contains("project") ||
+          element.classList.contains("service-card") ||
+          element.classList.contains("intro-enter") ||
+          element.classList.contains("intro-skip")
+        ) {
+
+          cursor.classList.add("active");
+
+        }
+
+      });
 
 
-  interactiveElements.forEach((element) => {
+      element.addEventListener("mouseleave", () => {
 
-    element.addEventListener("mouseenter", () => {
+        cursor.classList.remove("active");
 
-      if (
-        element.classList.contains("project") ||
-        element.classList.contains("intro-enter") ||
-        element.classList.contains("intro-skip")
-      ) {
-
-        cursor.classList.add("active");
-
-      }
+      });
 
     });
 
 
-    element.addEventListener("mouseleave", () => {
+  /* SERVICE CARD MOUSE MOVEMENT */
 
-      cursor.classList.remove("active");
+  services.forEach(card => {
+
+    card.addEventListener("mousemove", event => {
+
+      const rect = card.getBoundingClientRect();
+
+      const x =
+        event.clientX - rect.left;
+
+      const y =
+        event.clientY - rect.top;
+
+      const rotateX =
+        ((y / rect.height) - .5) * -5;
+
+      const rotateY =
+        ((x / rect.width) - .5) * 5;
+
+      card.style.transform =
+        `perspective(900px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)
+         translateY(-8px)
+         scale(1.012)`;
+
+    });
+
+
+    card.addEventListener("mouseleave", () => {
+
+      card.style.transform = "";
 
     });
 
@@ -181,15 +204,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const scrollTop = window.scrollY;
 
-    const documentHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
+    const height =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
 
     const percentage =
-      documentHeight > 0
-        ? (scrollTop / documentHeight) * 100
+      height > 0
+        ? (scrollTop / height) * 100
         : 0;
 
-    progress.style.width = `${percentage}%`;
+    progress.style.width =
+      `${percentage}%`;
 
   }
 
@@ -199,13 +224,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateHeader() {
 
     if (window.scrollY > 40) {
-
       header.classList.add("scrolled");
-
     } else {
-
       header.classList.remove("scrolled");
-
     }
 
   }
@@ -213,152 +234,162 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* REVEAL */
 
-  const revealObserver = new IntersectionObserver(
+  const revealObserver =
+    new IntersectionObserver(
 
-    (entries) => {
+      entries => {
 
-      entries.forEach((entry) => {
+        entries.forEach(entry => {
 
-        if (entry.isIntersecting) {
+          if (entry.isIntersecting) {
 
-          entry.target.classList.add("visible");
+            entry.target.classList.add("visible");
 
-          revealObserver.unobserve(entry.target);
+            revealObserver.unobserve(entry.target);
 
-        }
+          }
 
-      });
+        });
 
-    },
+      },
 
-    {
-      threshold: 0.12
-    }
+      {
+        threshold: .12
+      }
 
-  );
+    );
 
 
-  revealElements.forEach((element) => {
+  revealElements.forEach(element => {
 
     revealObserver.observe(element);
 
   });
 
 
-  /* ACTIVE NAVIGATION */
+  /* ACTIVE NAV */
 
-  const sections = document.querySelectorAll(
-    "#work, #about, #contact"
-  );
-
-
-  const sectionObserver = new IntersectionObserver(
-
-    (entries) => {
-
-      entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-          navLinks.forEach((link) => {
-
-            link.classList.remove("active");
-
-          });
+  const sections =
+    document.querySelectorAll(
+      "#work, #about, #contact"
+    );
 
 
-          const activeLink = document.querySelector(
-            `.main-nav a[data-section="${entry.target.id}"]`
-          );
+  const sectionObserver =
+    new IntersectionObserver(
+
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            navLinks.forEach(link => {
+              link.classList.remove("active");
+            });
 
 
-          if (activeLink) {
+            const active =
+              document.querySelector(
+                `.main-nav a[data-section="${entry.target.id}"]`
+              );
 
-            activeLink.classList.add("active");
+
+            active?.classList.add("active");
 
           }
 
-        }
+        });
 
-      });
+      },
 
-    },
+      {
+        rootMargin: "-35% 0px -55% 0px"
+      }
 
-    {
-      rootMargin: "-35% 0px -55% 0px"
-    }
-
-  );
+    );
 
 
-  sections.forEach((section) => {
+  sections.forEach(section => {
 
     sectionObserver.observe(section);
 
   });
 
 
-  /* SMOOTH INTERNAL LINKS */
+  /* SMOOTH SCROLL */
 
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(link => {
 
-    link.addEventListener("click", (event) => {
+      link.addEventListener("click", event => {
 
-      const targetId = link.getAttribute("href");
+        const targetId =
+          link.getAttribute("href");
 
-
-      if (!targetId || targetId === "#") {
-        return;
-      }
-
-
-      const target = document.querySelector(targetId);
-
-
-      if (!target) {
-        return;
-      }
+        if (!targetId || targetId === "#") {
+          return;
+        }
 
 
-      event.preventDefault();
+        const target =
+          document.querySelector(targetId);
 
 
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+        if (!target) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
       });
 
     });
 
-  });
-
 
   /* HERO PARALLAX */
 
-  const heroImage = document.querySelector(".hero-image");
-  const heroTitle = document.querySelector(".hero-title");
+  const heroImage =
+    document.querySelector(".hero-image");
+
+  const heroTitle =
+    document.querySelector(".hero-title");
 
 
-  window.addEventListener("scroll", () => {
+  window.addEventListener(
+    "scroll",
+    () => {
 
-    const scroll = window.scrollY;
-
-
-    if (scroll < window.innerHeight) {
-
-      heroImage.style.transform =
-        `scale(1.06) translateY(${scroll * 0.08}px)`;
+      const scroll = window.scrollY;
 
 
-      heroTitle.style.transform =
-        `translateY(${scroll * 0.035}px)`;
+      if (scroll < window.innerHeight) {
 
+        heroImage.style.transform =
+          `scale(1.07) translateY(${scroll * .08}px)`;
+
+
+        heroTitle.style.transform =
+          `translateY(${scroll * .035}px)`;
+
+      }
+
+    },
+    {
+      passive: true
     }
+  );
 
-  });
 
-
-  /* SCROLL EVENTS */
+  /* SCROLL */
 
   window.addEventListener(
     "scroll",
