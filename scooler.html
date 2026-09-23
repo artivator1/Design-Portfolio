@@ -4,6 +4,7 @@
 <head>
 
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -11,13 +12,11 @@
 
   <meta
     name="description"
-    content="Scooler AI — Brand identity, digital marketing and creative direction by Ayomide Adegboro."
+    content="Scooler AI. Brand identity, creative direction and digital design by Ayomide Adegboro."
   >
 
   <title>Scooler AI | Ayomide Adegboro</title>
 
-
-  <!-- FONTS -->
 
   <link
     rel="preload"
@@ -43,1013 +42,79 @@
     crossorigin
   >
 
-
-  <!-- EXISTING SITE CSS -->
-
   <link
     rel="stylesheet"
     href="style.css?v=13"
   >
 
-
-  <!-- PROJECT PAGE STYLES -->
-
-  <style>
-
-    /* =========================================================
-       PROJECT PAGE
-    ========================================================= */
-
-    .project-page {
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      overflow: hidden;
-    }
-
-
-    /* =========================================================
-       PROJECT HEADER
-    ========================================================= */
-
-    .project-page-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 500;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 28px 42px;
-
-      transition:
-        background .4s ease,
-        backdrop-filter .4s ease,
-        padding .4s ease;
-    }
-
-
-    .project-page-header.scrolled {
-      padding: 20px 42px;
-
-      background: rgba(7,7,7,.62);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-
-
-    .project-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-
-      color: var(--text);
-      text-decoration: none;
-
-      font-family: Aquatico, sans-serif;
-      font-size: 11px;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-
-      opacity: .72;
-
-      transition:
-        opacity .3s ease,
-        transform .3s ease;
-    }
-
-
-    .project-back:hover {
-      opacity: 1;
-      transform: translateX(-4px);
-    }
-
-
-    .project-back-arrow {
-      font-size: 16px;
-      line-height: 1;
-    }
-
-
-    .project-page-brand {
-      font-family: Aquatico, sans-serif;
-      font-size: 11px;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       HERO
-    ========================================================= */
-
-    .project-hero {
-      min-height: 100svh;
-
-      padding:
-        180px 6vw
-        80px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      position: relative;
-    }
-
-
-    .project-hero::before {
-      content: "";
-
-      position: absolute;
-      width: 650px;
-      height: 650px;
-
-      top: 5%;
-      right: -15%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(112,76,255,.22),
-          transparent 68%
-        );
-
-      filter: blur(60px);
-
-      pointer-events: none;
-    }
-
-
-    .project-hero-top {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      gap: 40px;
-    }
-
-
-    .project-index {
-      font-family: Aquatico, sans-serif;
-      font-size: 11px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-
-      opacity: .48;
-    }
-
-
-    .project-type {
-      font-family: Quera, sans-serif;
-      font-size: 15px;
-      line-height: 1.5;
-
-      max-width: 260px;
-
-      opacity: .65;
-    }
-
-
-    .project-title-wrap {
-      position: relative;
-      z-index: 2;
-
-      margin-top: auto;
-      padding-top: 120px;
-    }
-
-
-    .project-title {
-      margin: 0;
-
-      font-family: Rugis, sans-serif;
-      font-size: clamp(90px, 16vw, 240px);
-      font-weight: 400;
-
-      line-height: .78;
-      letter-spacing: -.055em;
-
-      white-space: nowrap;
-    }
-
-
-    .project-title-outline {
-      color: transparent;
-
-      -webkit-text-stroke:
-        1px rgba(255,255,255,.65);
-
-      display: block;
-
-      transform: translateX(5vw);
-    }
-
-
-    .project-title-solid {
-      display: block;
-
-      margin-top: -1px;
-
-      color: var(--text);
-    }
-
-
-    .project-year {
-      margin-top: 55px;
-
-      display: flex;
-      align-items: center;
-      gap: 18px;
-
-      font-family: Aquatico, sans-serif;
-      font-size: 11px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-
-      opacity: .5;
-    }
-
-
-    .project-year::before {
-      content: "";
-
-      width: 42px;
-      height: 1px;
-
-      background: currentColor;
-    }
-
-
-    /* =========================================================
-       HERO VISUAL
-    ========================================================= */
-
-    .project-hero-visual {
-      position: relative;
-
-      width: 100%;
-      height: min(68vw, 720px);
-
-      margin-top: 100px;
-
-      border-radius: 34px;
-
-      overflow: hidden;
-
-      background:
-        radial-gradient(
-          circle at 72% 28%,
-          rgba(127,91,255,.35),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 20% 75%,
-          rgba(255,255,255,.09),
-          transparent 32%
-        ),
-        #101010;
-
-      border: 1px solid rgba(255,255,255,.1);
-
-      box-shadow:
-        0 40px 100px rgba(0,0,0,.32),
-        inset 0 1px 0 rgba(255,255,255,.1);
-    }
-
-
-    .project-visual-glow {
-      position: absolute;
-
-      width: 420px;
-      height: 420px;
-
-      top: 50%;
-      left: 50%;
-
-      transform:
-        translate(-50%, -50%);
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(133,98,255,.28),
-          transparent 70%
-        );
-
-      filter: blur(35px);
-    }
-
-
-    .project-visual-window {
-      position: absolute;
-
-      width: 58%;
-      height: 68%;
-
-      left: 50%;
-      top: 50%;
-
-      transform:
-        translate(-50%, -50%)
-        rotate(-4deg);
-
-      border-radius: 24px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.13),
-          rgba(255,255,255,.035)
-        );
-
-      border: 1px solid rgba(255,255,255,.17);
-
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-
-      box-shadow:
-        0 40px 100px rgba(0,0,0,.5),
-        inset 0 1px 0 rgba(255,255,255,.16);
-
-      overflow: hidden;
-    }
-
-
-    .visual-window-top {
-      height: 46px;
-
-      display: flex;
-      align-items: center;
-
-      padding: 0 18px;
-
-      border-bottom:
-        1px solid rgba(255,255,255,.1);
-    }
-
-
-    .visual-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-
-    .visual-dots span {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: rgba(255,255,255,.28);
-    }
-
-
-    .visual-window-body {
-      height: calc(100% - 46px);
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      padding: 8%;
-    }
-
-
-    .visual-mini-label {
-      font-family: Aquatico, sans-serif;
-      font-size: 8px;
-      letter-spacing: .16em;
-
-      opacity: .45;
-
-      margin-bottom: 20px;
-    }
-
-
-    .visual-mini-title {
-      font-family: Rugis, sans-serif;
-      font-size: clamp(34px, 5vw, 75px);
-
-      line-height: .85;
-
-      max-width: 80%;
-    }
-
-
-    .visual-mini-line {
-      width: 55%;
-      height: 1px;
-
-      margin-top: 35px;
-
-      background: rgba(255,255,255,.22);
-    }
-
-
-    .visual-mini-copy {
-      width: 65%;
-
-      margin-top: 20px;
-
-      font-family: Quera, sans-serif;
-      font-size: 12px;
-      line-height: 1.6;
-
-      opacity: .45;
-    }
-
-
-    .project-visual-label {
-      position: absolute;
-
-      left: 28px;
-      bottom: 26px;
-
-      font-family: Aquatico, sans-serif;
-      font-size: 9px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-
-      opacity: .4;
-    }
-
-
-    .project-visual-number {
-      position: absolute;
-
-      right: 28px;
-      bottom: 26px;
-
-      font-family: Aquatico, sans-serif;
-      font-size: 9px;
-      letter-spacing: .14em;
-
-      opacity: .4;
-    }
-
-
-    /* =========================================================
-       PROJECT INTRO
-    ========================================================= */
-
-    .project-intro {
-      padding:
-        180px 12vw
-        180px;
-
-      display: grid;
-
-      grid-template-columns:
-        minmax(160px, .6fr)
-        minmax(0, 1.4fr);
-
-      gap: 80px;
-    }
-
-
-    .project-section-label {
-      font-family: Aquatico, sans-serif;
-      font-size: 10px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-
-      opacity: .45;
-    }
-
-
-    .project-intro-copy {
-      max-width: 780px;
-    }
-
-
-    .project-intro-copy p {
-      margin: 0;
-
-      font-family: Quera, sans-serif;
-      font-size: clamp(26px, 3.2vw, 50px);
-      line-height: 1.18;
-
-      letter-spacing: .01em;
-    }
-
-
-    .project-intro-copy p + p {
-      margin-top: 35px;
-
-      font-size: 17px;
-      line-height: 1.7;
-
-      max-width: 650px;
-
-      opacity: .58;
-    }
-
-
-    /* =========================================================
-       PROJECT DETAILS
-    ========================================================= */
-
-    .project-details {
-      padding:
-        0 12vw
-        160px;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 30px;
-    }
-
-
-    .project-detail {
-      padding-top: 22px;
-
-      border-top:
-        1px solid rgba(255,255,255,.14);
-    }
-
-
-    .project-detail-label {
-      display: block;
-
-      margin-bottom: 18px;
-
-      font-family: Aquatico, sans-serif;
-      font-size: 9px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-
-      opacity: .42;
-    }
-
-
-    .project-detail-value {
-      font-family: Quera, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-
-      opacity: .8;
-    }
-
-
-    /* =========================================================
-       IMAGE PLACEHOLDER
-    ========================================================= */
-
-    .project-image-section {
-      padding:
-        0 6vw
-        180px;
-    }
-
-
-    .project-image {
-      position: relative;
-
-      width: 100%;
-      height: 75vh;
-
-      min-height: 500px;
-
-      border-radius: 32px;
-
-      overflow: hidden;
-
-      background:
-        linear-gradient(
-          135deg,
-          #111,
-          #191919
-        );
-
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-
-    .project-image-inner {
-      width: 72%;
-      height: 72%;
-
-      border-radius: 24px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.1),
-          rgba(255,255,255,.025)
-        );
-
-      border:
-        1px solid rgba(255,255,255,.12);
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      box-shadow:
-        0 30px 80px rgba(0,0,0,.4);
-    }
-
-
-    .project-image-placeholder {
-      font-family: Aquatico, sans-serif;
-      font-size: 10px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-
-      opacity: .3;
-    }
-
-
-    /* =========================================================
-       NEXT PROJECT
-    ========================================================= */
-
-    .project-next {
-      padding:
-        160px 6vw
-        100px;
-
-      border-top:
-        1px solid rgba(255,255,255,.08);
-    }
-
-
-    .project-next-label {
-      font-family: Aquatico, sans-serif;
-      font-size: 10px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-
-      opacity: .4;
-    }
-
-
-    .project-next-link {
-      display: block;
-
-      margin-top: 70px;
-
-      color: var(--text);
-      text-decoration: none;
-    }
-
-
-    .project-next-link h2 {
-      margin: 0;
-
-      font-family: Rugis, sans-serif;
-      font-size: clamp(70px, 13vw, 190px);
-      font-weight: 400;
-
-      line-height: .8;
-      letter-spacing: -.05em;
-
-      transition:
-        transform .7s cubic-bezier(.16,1,.3,1),
-        opacity .4s ease;
-    }
-
-
-    .project-next-link:hover h2 {
-      transform: translateX(25px);
-    }
-
-
-    .project-next-meta {
-      margin-top: 35px;
-
-      display: flex;
-      align-items: center;
-      gap: 15px;
-
-      font-family: Aquatico, sans-serif;
-      font-size: 10px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-
-      opacity: .5;
-    }
-
-
-    /* =========================================================
-       FOOTER
-    ========================================================= */
-
-    .project-footer {
-      padding:
-        35px 42px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      border-top:
-        1px solid rgba(255,255,255,.08);
-
-      font-family: Aquatico, sans-serif;
-      font-size: 9px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-
-      opacity: .45;
-    }
-
-
-    .project-footer a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-
-    /* =========================================================
-       LIGHT MODE
-    ========================================================= */
-
-    body.light .project-page-header.scrolled {
-      background: rgba(245,245,245,.7);
-      border-bottom-color: rgba(0,0,0,.08);
-    }
-
-
-    body.light .project-title-outline {
-      -webkit-text-stroke:
-        1px rgba(0,0,0,.45);
-    }
-
-
-    body.light .project-hero::before {
-      background:
-        radial-gradient(
-          circle,
-          rgba(100,70,220,.14),
-          transparent 68%
-        );
-    }
-
-
-    body.light .project-hero-visual {
-      background:
-        radial-gradient(
-          circle at 72% 28%,
-          rgba(120,90,240,.2),
-          transparent 30%
-        ),
-        #ededed;
-
-      border-color: rgba(0,0,0,.08);
-    }
-
-
-    body.light .project-visual-window,
-    body.light .project-image-inner {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.72),
-          rgba(255,255,255,.4)
-        );
-
-      border-color: rgba(0,0,0,.1);
-    }
-
-
-    body.light .project-detail {
-      border-top-color: rgba(0,0,0,.12);
-    }
-
-
-    /* =========================================================
-       MOBILE
-    ========================================================= */
-
-    @media (max-width: 800px) {
-
-      .project-page-header {
-        padding: 22px 20px;
-      }
-
-
-      .project-page-header.scrolled {
-        padding: 17px 20px;
-      }
-
-
-      .project-page-brand {
-        display: none;
-      }
-
-
-      .project-hero {
-        padding:
-          140px 20px
-          45px;
-      }
-
-
-      .project-hero-top {
-        gap: 25px;
-      }
-
-
-      .project-type {
-        max-width: 170px;
-        font-size: 13px;
-      }
-
-
-      .project-title-wrap {
-        padding-top: 100px;
-      }
-
-
-      .project-title {
-        font-size: clamp(70px, 19vw, 130px);
-        white-space: normal;
-      }
-
-
-      .project-title-outline {
-        transform: translateX(6vw);
-      }
-
-
-      .project-hero-visual {
-        height: 100vw;
-        min-height: 430px;
-
-        margin-top: 70px;
-
-        border-radius: 24px;
-      }
-
-
-      .project-visual-window {
-        width: 78%;
-        height: 62%;
-      }
-
-
-      .project-intro {
-        padding:
-          120px 20px;
-
-        display: block;
-      }
-
-
-      .project-section-label {
-        margin-bottom: 45px;
-      }
-
-
-      .project-intro-copy p {
-        font-size: 28px;
-      }
-
-
-      .project-intro-copy p + p {
-        font-size: 16px;
-      }
-
-
-      .project-details {
-        padding:
-          0 20px
-          120px;
-
-        grid-template-columns: 1fr;
-
-        gap: 40px;
-      }
-
-
-      .project-image-section {
-        padding:
-          0 20px
-          120px;
-      }
-
-
-      .project-image {
-        height: 70vw;
-        min-height: 350px;
-
-        border-radius: 24px;
-      }
-
-
-      .project-image-inner {
-        width: 78%;
-        height: 68%;
-      }
-
-
-      .project-next {
-        padding:
-          120px 20px
-          80px;
-      }
-
-
-      .project-next-link {
-        margin-top: 50px;
-      }
-
-
-      .project-next-link h2 {
-        font-size: clamp(65px, 18vw, 110px);
-      }
-
-
-      .project-footer {
-        padding: 28px 20px;
-
-        flex-direction: column;
-        align-items: flex-start;
-
-        gap: 15px;
-      }
-
-    }
-
-
-    @media (prefers-reduced-motion: reduce) {
-
-      .project-back,
-      .project-next-link h2 {
-        transition: none;
-      }
-
-    }
-
-  </style>
+  <link
+    rel="stylesheet"
+    href="scooler.css?v=1"
+  >
 
 </head>
 
 
-<body>
+<body class="project-body">
 
+
+  <!-- CURSOR -->
+
+  <div class="project-cursor">
+    <span>VIEW</span>
+  </div>
+
+
+  <!-- PAGE -->
 
   <div class="project-page">
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+    <!-- HEADER -->
 
-    <header class="project-page-header">
+    <header class="project-header">
 
       <a
         href="index.html"
         class="project-back"
       >
-        <span class="project-back-arrow">←</span>
-        <span>Back to work</span>
+
+        <span class="project-back-icon">
+          ←
+        </span>
+
+        <span>
+          Back to work
+        </span>
+
       </a>
 
 
-      <span class="project-page-brand">
-        Ayomide Adegboro
-      </span>
+      <a
+        href="index.html"
+        class="project-brand"
+      >
+        AYOMIDE ADEGBORO
+      </a>
 
 
       <button
-        class="theme-toggle"
-        aria-label="Toggle colour mode"
+        class="project-theme"
         type="button"
+        aria-label="Toggle colour mode"
       >
-        <span class="theme-icon">◌</span>
+
+        <span class="project-theme-icon">
+          ◌
+        </span>
+
       </button>
 
     </header>
 
 
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
+    <!-- HERO -->
 
     <main>
 
@@ -1057,130 +122,151 @@
       <section class="project-hero">
 
 
-        <div class="project-hero-top">
+        <div class="project-hero-meta reveal-project">
 
-          <span class="project-index">
-            Project 01
-          </span>
+          <div class="project-number">
+            01 / 12
+          </div>
 
 
-          <p class="project-type">
-            Agentic AI · Brand Identity · Digital Marketing
-          </p>
+          <div class="project-category">
+            Brand Identity<br>
+            Digital Marketing<br>
+            Creative Direction
+          </div>
 
         </div>
 
 
 
-        <div class="project-title-wrap">
+        <div class="project-title-area">
+
+          <div class="project-eyebrow reveal-project">
+            SELECTED WORK / 2026
+          </div>
+
 
           <h1 class="project-title">
 
-            <span class="project-title-outline">
+            <span class="title-outline">
               Scooler
             </span>
 
-            <span class="project-title-solid">
+            <span class="title-solid">
               AI
             </span>
 
           </h1>
 
 
-          <div class="project-year">
+          <div class="project-title-bottom reveal-project">
+
+            <p>
+              Building a visual world for a new generation
+              of student tools.
+            </p>
+
+
+            <span class="scroll-indicator">
+              SCROLL TO EXPLORE
+              <span class="scroll-line"></span>
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- HERO IMAGE -->
+
+      <section class="project-hero-image-section">
+
+        <div
+          class="project-hero-image project-image-reveal"
+          data-parallax="0.12"
+        >
+
+          <div class="hero-image-overlay"></div>
+
+
+          <div class="hero-image-content">
+
+            <span class="hero-image-label">
+              SCOOLER AI
+            </span>
+
+
+            <div class="hero-image-word">
+              SC
+              <span>OO</span>
+              LER
+            </div>
+
+
+            <span class="hero-image-subtitle">
+              INTELLIGENCE FOR THE JOURNEY AHEAD
+            </span>
+
+          </div>
+
+
+          <div class="hero-image-corner top-left">
+            01
+          </div>
+
+          <div class="hero-image-corner top-right">
             2026
           </div>
 
-        </div>
-
-
-
-        <!-- HERO VISUAL -->
-
-        <div class="project-hero-visual">
-
-          <div class="project-visual-glow"></div>
-
-
-          <div class="project-visual-window">
-
-            <div class="visual-window-top">
-
-              <div class="visual-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-
-            </div>
-
-
-            <div class="visual-window-body">
-
-              <span class="visual-mini-label">
-                SCooler AI
-              </span>
-
-              <div class="visual-mini-title">
-                Your next move,
-                made clearer.
-              </div>
-
-              <div class="visual-mini-line"></div>
-
-              <div class="visual-mini-copy">
-                AI powered tools designed to help students
-                navigate applications, academics and their
-                next big step.
-              </div>
-
-            </div>
-
+          <div class="hero-image-corner bottom-left">
+            BRAND / DIGITAL
           </div>
 
-
-          <span class="project-visual-label">
-            Brand / Digital / AI
-          </span>
-
-
-          <span class="project-visual-number">
-            01 / 01
-          </span>
+          <div class="hero-image-corner bottom-right">
+            LAGOS, NIGERIA
+          </div>
 
         </div>
-
 
       </section>
 
 
 
-      <!-- =====================================================
-           INTRO
-      ====================================================== -->
+      <!-- INTRO -->
 
       <section class="project-intro">
 
+        <div class="project-section-label reveal-project">
+          THE PROJECT
+        </div>
 
-        <span class="project-section-label">
-          Overview
-        </span>
+
+        <div class="project-intro-content">
+
+          <h2 class="reveal-project">
+            Making the student journey
+            feel <em>clearer.</em>
+          </h2>
 
 
-        <div class="project-intro-copy">
-
-          <p>
-            Scooler is built around a simple idea:
-            making the student journey feel less complicated.
+          <p class="reveal-project">
+            Scooler is an AI powered platform built around
+            the different moments students encounter while
+            navigating education, applications and their
+            future.
           </p>
 
 
-          <p>
-            I worked across the brand identity, visual direction
-            and digital marketing system, creating a visual
-            language that feels intelligent, youthful and clear
-            without falling into the usual visual clichés of AI
-            products.
+          <p class="reveal-project">
+            The visual direction was designed to make
+            intelligence feel approachable. Instead of
+            leaning into the expected language of futuristic
+            AI, the identity needed to feel human, youthful,
+            confident and easy to understand.
           </p>
 
         </div>
@@ -1189,50 +275,60 @@
 
 
 
-      <!-- =====================================================
-           DETAILS
-      ====================================================== -->
+      <!-- DETAILS -->
 
       <section class="project-details">
 
+        <div class="detail-item reveal-project">
 
-        <div class="project-detail">
-
-          <span class="project-detail-label">
-            Client
+          <span class="detail-label">
+            CLIENT
           </span>
 
-          <span class="project-detail-value">
+          <span class="detail-value">
             Scooler AI
           </span>
 
         </div>
 
 
-        <div class="project-detail">
+        <div class="detail-item reveal-project">
 
-          <span class="project-detail-label">
-            Role
+          <span class="detail-label">
+            ROLE
           </span>
 
-          <span class="project-detail-value">
-            Brand Designer<br>
+          <span class="detail-value">
+            Visual Designer<br>
             Creative Direction
           </span>
 
         </div>
 
 
-        <div class="project-detail">
+        <div class="detail-item reveal-project">
 
-          <span class="project-detail-label">
-            Scope
+          <span class="detail-label">
+            DISCIPLINE
           </span>
 
-          <span class="project-detail-value">
-            Identity<br>
-            Digital Marketing<br>
-            Visual Communication
+          <span class="detail-value">
+            Brand Identity<br>
+            Digital Design<br>
+            Marketing
+          </span>
+
+        </div>
+
+
+        <div class="detail-item reveal-project">
+
+          <span class="detail-label">
+            YEAR
+          </span>
+
+          <span class="detail-value">
+            2026
           </span>
 
         </div>
@@ -1241,62 +337,241 @@
 
 
 
-      <!-- =====================================================
-           IMAGE / CASE STUDY VISUAL
-      ====================================================== -->
+      <!-- STATEMENT -->
 
-      <section class="project-image-section">
+      <section class="project-statement">
+
+        <div class="statement-line"></div>
 
 
-        <div class="project-image">
+        <h2 class="reveal-project">
+          Intelligence doesn't have
+          to feel complicated.
+        </h2>
 
-          <div class="project-image-inner">
 
-            <span class="project-image-placeholder">
-              Scooler visual coming here
-            </span>
+        <div class="statement-line"></div>
 
+      </section>
+
+
+
+      <!-- VISUAL -->
+
+      <section class="project-large-visual">
+
+        <div
+          class="large-visual-frame"
+          data-parallax="0.08"
+        >
+
+          <div class="large-visual-glow"></div>
+
+
+          <div class="scooler-interface">
+
+            <div class="interface-header">
+
+              <div class="interface-logo">
+                scooler<span>.</span>
+              </div>
+
+
+              <div class="interface-nav">
+                <span>Explore</span>
+                <span>Applications</span>
+                <span>Profile</span>
+              </div>
+
+            </div>
+
+
+            <div class="interface-body">
+
+              <span class="interface-kicker">
+                YOUR NEXT MOVE
+              </span>
+
+
+              <h3>
+                What are you
+                working on?
+              </h3>
+
+
+              <div class="interface-input">
+                <span>
+                  Tell Scooler what you need help with...
+                </span>
+
+                <span class="input-arrow">
+                  ↗
+                </span>
+              </div>
+
+
+              <div class="interface-pills">
+
+                <span>
+                  University
+                </span>
+
+                <span>
+                  Applications
+                </span>
+
+                <span>
+                  Career
+                </span>
+
+                <span>
+                  Study
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="visual-caption">
+            PRODUCT DIRECTION / DIGITAL EXPERIENCE
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- DESIGN DIRECTION -->
+
+      <section class="project-direction">
+
+        <div class="project-section-label reveal-project">
+          VISUAL DIRECTION
+        </div>
+
+
+        <div class="direction-content">
+
+          <h2 class="reveal-project">
+            Designed to feel
+            <span>smart, not cold.</span>
+          </h2>
+
+
+          <p class="reveal-project">
+            The system combines expressive typography,
+            restrained colour, soft surfaces and clear
+            information hierarchy. The result is a visual
+            language that can move comfortably between
+            product, social content and campaigns.
+          </p>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- IMAGE GRID -->
+
+      <section class="project-grid">
+
+        <div
+          class="project-grid-image grid-large reveal-project"
+          data-parallax="0.05"
+        >
+
+          <div class="grid-placeholder">
+            SCOOLER / 01
           </div>
 
         </div>
 
 
+        <div
+          class="project-grid-image grid-small reveal-project"
+          data-parallax="0.08"
+        >
+
+          <div class="grid-placeholder">
+            SCOOLER / 02
+          </div>
+
+        </div>
+
+
+        <div
+          class="project-grid-image grid-wide reveal-project"
+          data-parallax="0.04"
+        >
+
+          <div class="grid-placeholder">
+            SCOOLER / 03
+          </div>
+
+        </div>
+
       </section>
 
 
 
-      <!-- =====================================================
-           NEXT PROJECT
-      ====================================================== -->
+      <!-- CLOSING -->
 
-      <section class="project-next">
+      <section class="project-closing">
 
-        <span class="project-next-label">
-          Next project
-        </span>
+        <div class="closing-label reveal-project">
+          THE RESULT
+        </div>
+
+
+        <h2 class="reveal-project">
+          A brand built for
+          <span>what comes next.</span>
+        </h2>
+
+
+        <p class="reveal-project">
+          Scooler needed to feel like more than another
+          education platform. The identity gives it room
+          to grow across products, content and experiences
+          while keeping the student at the centre.
+        </p>
+
+      </section>
+
+
+
+      <!-- NEXT -->
+
+      <section class="next-project">
+
+        <div class="next-project-label">
+          NEXT PROJECT
+        </div>
 
 
         <a
           href="#"
-          class="project-next-link"
+          class="next-project-link"
         >
+
+          <span class="next-project-number">
+            02
+          </span>
+
 
           <h2>
             Hexa
           </h2>
 
 
-          <div class="project-next-meta">
-
-            <span>
-              Brand identity
-            </span>
-
-            <span>
-              ↗
-            </span>
-
-          </div>
+          <span class="next-project-arrow">
+            ↗
+          </span>
 
         </a>
 
@@ -1307,9 +582,7 @@
 
 
 
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
+    <!-- FOOTER -->
 
     <footer class="project-footer">
 
@@ -1333,217 +606,7 @@
   </div>
 
 
-
-  <!-- =======================================================
-       PROJECT PAGE SCRIPT
-  ======================================================== -->
-
-  <script>
-
-    document.addEventListener("DOMContentLoaded", () => {
-
-      const body = document.body;
-      const header = document.querySelector(".project-page-header");
-      const themeToggle = document.querySelector(".theme-toggle");
-      const themeIcon = document.querySelector(".theme-icon");
-
-
-      /* -----------------------------------------------
-         THEME
-      ----------------------------------------------- */
-
-      const savedTheme =
-        localStorage.getItem("portfolio-theme");
-
-
-      if (savedTheme === "light") {
-        body.classList.add("light");
-      } else {
-        body.classList.remove("light");
-      }
-
-
-      function updateThemeIcon() {
-
-        if (!themeIcon) return;
-
-
-        if (body.classList.contains("light")) {
-
-          themeIcon.textContent = "◐";
-
-          themeToggle?.setAttribute(
-            "aria-label",
-            "Switch to dark mode"
-          );
-
-        } else {
-
-          themeIcon.textContent = "◌";
-
-          themeToggle?.setAttribute(
-            "aria-label",
-            "Switch to light mode"
-          );
-
-        }
-
-      }
-
-
-      updateThemeIcon();
-
-
-      themeToggle?.addEventListener(
-        "click",
-        () => {
-
-          body.classList.toggle("light");
-
-
-          const currentTheme =
-            body.classList.contains("light")
-              ? "light"
-              : "dark";
-
-
-          localStorage.setItem(
-            "portfolio-theme",
-            currentTheme
-          );
-
-
-          updateThemeIcon();
-
-        }
-      );
-
-
-
-      /* -----------------------------------------------
-         HEADER
-      ----------------------------------------------- */
-
-      function updateHeader() {
-
-        if (!header) return;
-
-
-        if (window.scrollY > 40) {
-
-          header.classList.add("scrolled");
-
-        } else {
-
-          header.classList.remove("scrolled");
-
-        }
-
-      }
-
-
-      updateHeader();
-
-
-      window.addEventListener(
-        "scroll",
-        updateHeader,
-        { passive: true }
-      );
-
-
-
-      /* -----------------------------------------------
-         HERO PARALLAX
-      ----------------------------------------------- */
-
-      const visual =
-        document.querySelector(".project-visual-window");
-
-
-      if (visual) {
-
-        window.addEventListener(
-          "scroll",
-          () => {
-
-            const scroll =
-              window.scrollY;
-
-            if (scroll < window.innerHeight) {
-
-              const movement =
-                scroll * 0.08;
-
-              visual.style.transform =
-                `translate(-50%, calc(-50% + ${movement}px)) rotate(-4deg)`;
-
-            }
-
-          },
-          { passive: true }
-        );
-
-      }
-
-
-
-      /* -----------------------------------------------
-         IMAGE HOVER MOVEMENT
-      ----------------------------------------------- */
-
-      const heroVisual =
-        document.querySelector(".project-hero-visual");
-
-
-      if (heroVisual && visual) {
-
-        heroVisual.addEventListener(
-          "mousemove",
-          (event) => {
-
-            const rect =
-              heroVisual.getBoundingClientRect();
-
-
-            const x =
-              (event.clientX - rect.left)
-              / rect.width
-              - .5;
-
-
-            const y =
-              (event.clientY - rect.top)
-              / rect.height
-              - .5;
-
-
-            visual.style.marginLeft =
-              `${x * 18}px`;
-
-
-            visual.style.marginTop =
-              `${y * 18}px`;
-
-          }
-        );
-
-
-        heroVisual.addEventListener(
-          "mouseleave",
-          () => {
-
-            visual.style.marginLeft = "0";
-            visual.style.marginTop = "0";
-
-          }
-        );
-
-      }
-
-    });
-
-  </script>
+  <script src="scooler.js?v=1"></script>
 
 </body>
 
