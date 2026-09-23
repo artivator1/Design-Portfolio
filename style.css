@@ -212,6 +212,7 @@ button {
   line-height: .7;
   letter-spacing: -.065em;
   opacity: 0;
+  z-index: 2;
 }
 
 
@@ -230,6 +231,8 @@ button {
 }
 
 
+/* THE RING NOW SITS BEHIND THE TEXT */
+
 .intro-ring {
   position: absolute;
   width: clamp(180px, 24vw, 350px);
@@ -237,6 +240,7 @@ button {
   border: 1px solid rgba(255,255,255,.22);
   border-radius: 50%;
   animation: ringSpin 8s linear infinite;
+  z-index: 0;
 }
 
 
@@ -254,6 +258,7 @@ button {
   inset: 38%;
   background: rgba(255,255,255,.1);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 
@@ -272,6 +277,7 @@ button {
   font-family: "Aquatico", Arial, sans-serif;
   font-size: 8px;
   letter-spacing: .09em;
+  z-index: 3;
 }
 
 
@@ -1451,7 +1457,6 @@ body.light .service-card {
 
 .about-photo-card.visible {
   opacity: 1;
-
   transform: translateX(0) !important;
 }
 
@@ -1688,6 +1693,12 @@ body.light .service-card {
 
   .intro-statement {
     font-size: 24vw;
+    z-index: 2;
+  }
+
+
+  .intro-ring {
+    z-index: 0;
   }
 
 
