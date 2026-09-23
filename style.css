@@ -312,14 +312,45 @@ button {
 }
 
 
-.intro-enter span:last-child {
-  font-family: Arial, sans-serif;
-  font-size: 17px;
+.css-arrow-diagonal {
+  position: relative;
+  width: 17px;
+  height: 17px;
+  display: block;
   transition: transform .35s ease;
 }
 
 
-.intro-enter:hover span:last-child {
+.css-arrow-diagonal::before,
+.css-arrow-diagonal::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+
+.css-arrow-diagonal::before {
+  width: 12px;
+  height: 1.5px;
+  background: currentColor;
+  left: 2px;
+  top: 11px;
+  transform: rotate(-45deg);
+  transform-origin: left center;
+}
+
+
+.css-arrow-diagonal::after {
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  right: 1px;
+  top: 2px;
+}
+
+
+.intro-enter:hover .css-arrow-diagonal {
   transform: translate(5px,-5px);
 }
 
@@ -861,9 +892,39 @@ button {
 
 
 .scroll-arrow {
-  font-family: Arial, sans-serif;
-  font-size: 18px;
+  position: relative;
+  width: 14px;
+  height: 20px;
+  display: block;
   transition: transform .3s ease;
+}
+
+
+.scroll-arrow::before,
+.scroll-arrow::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+
+.scroll-arrow::before {
+  width: 1.5px;
+  height: 14px;
+  background: currentColor;
+  left: 6px;
+  top: 1px;
+}
+
+
+.scroll-arrow::after {
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  left: 3px;
+  bottom: 1px;
+  transform: rotate(45deg);
 }
 
 
@@ -1162,16 +1223,39 @@ body.light .glass-pill {
 
 
 .project-arrow {
-  font-size: 0;
+  width: 25px;
+  height: 25px;
+  position: relative;
   transition: transform .4s ease;
 }
 
 
+.project-arrow::before,
 .project-arrow::after {
-  content: "↗";
+  content: "";
+  position: absolute;
   display: block;
-  font-family: Arial, sans-serif;
-  font-size: 25px;
+}
+
+
+.project-arrow::before {
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  left: 3px;
+  top: 12px;
+  transform: rotate(-45deg);
+  transform-origin: left center;
+}
+
+
+.project-arrow::after {
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  right: 2px;
+  top: 4px;
 }
 
 
@@ -1386,17 +1470,45 @@ body.light .service-card {
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 0;
+  font-size: 25px;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition:
     transform .5s ease,
     opacity .5s ease;
 }
 
 
-.service-icon::after {
-  content: "↗";
-  font-family: Arial, sans-serif;
-  font-size: 25px;
+.service-icon-arrow::before,
+.service-icon-arrow::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+
+.service-icon-arrow::before {
+  width: 17px;
+  height: 1.5px;
+  background: currentColor;
+  left: 3px;
+  top: 14px;
+  transform: rotate(-45deg);
+  transform-origin: left center;
+}
+
+
+.service-icon-arrow::after {
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  right: 2px;
+  top: 5px;
 }
 
 
@@ -1446,15 +1558,38 @@ body.light .service-card {
   position: absolute;
   right: 28px;
   bottom: 27px;
-  font-size: 0;
+  width: 24px;
+  height: 24px;
   transition: transform .4s ease;
 }
 
 
+.service-arrow::before,
 .service-arrow::after {
-  content: "↗";
-  font-family: Arial, sans-serif;
-  font-size: 24px;
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+
+.service-arrow::before {
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  left: 2px;
+  top: 12px;
+  transform: rotate(-45deg);
+  transform-origin: left center;
+}
+
+
+.service-arrow::after {
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  right: 1px;
+  top: 4px;
 }
 
 
@@ -1635,7 +1770,10 @@ body.light .about-photo-card {
 
 
 .site-footer a {
-  font-size: 0;
+  font-size: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 
@@ -1646,17 +1784,18 @@ body.light .about-photo-card {
 
 
 .site-footer a::after {
-  content: " ↗";
-  font-family: Arial, sans-serif;
-  font-size: 11px;
-  margin-left: 6px;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(-45deg);
   transition: transform .3s ease;
-  display: inline-block;
 }
 
 
 .site-footer a:hover::after {
-  transform: translate(4px,-4px);
+  transform: translate(3px,-3px) rotate(-45deg);
 }
 
 
