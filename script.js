@@ -1,34 +1,86 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const body = document.body;
-  const loader = document.querySelector(".page-loader");
+
+  const intro = document.querySelector(".intro");
+  const enterPortfolio = document.querySelector("#enterPortfolio");
+  const skipIntro = document.querySelector("#skipIntro");
+
   const cursor = document.querySelector(".cursor");
   const progress = document.querySelector(".scroll-progress");
   const header = document.querySelector(".site-header");
+
   const themeToggle = document.querySelector(".theme-toggle");
   const themeIcon = document.querySelector(".theme-icon");
+
   const navLinks = document.querySelectorAll(".main-nav a");
   const revealElements = document.querySelectorAll(".reveal");
 
 
-  /* PAGE LOADER */
+  /* INTRO EXPERIENCE */
 
-  window.addEventListener("load", () => {
+  const introSeen = sessionStorage.getItem("portfolio-intro-seen");
+
+
+  function closeIntro() {
+
+    if (!intro) {
+      return;
+    }
+
+    intro.classList.add("exit");
+    body.classList.remove("intro-active");
+
+    sessionStorage.setItem("portfolio-intro-seen", "true");
 
     setTimeout(() => {
-      loader.classList.add("hidden");
-    }, 700);
+      intro.style.display = "none";
+    }, 1100);
 
-  });
+  }
+
+
+  if (introSeen === "true") {
+
+    intro.style.display = "none";
+    body.classList.remove("intro-active");
+
+  } else {
+
+    setTimeout(() => {
+      closeIntro();
+    }, 6000);
+
+  }
+
+
+  if (enterPortfolio) {
+
+    enterPortfolio.addEventListener("click", () => {
+      closeIntro();
+    });
+
+  }
+
+
+  if (skipIntro) {
+
+    skipIntro.addEventListener("click", () => {
+      closeIntro();
+    });
+
+  }
 
 
   /* THEME */
 
   const savedTheme = localStorage.getItem("portfolio-theme");
 
+
   if (savedTheme === "light") {
     body.classList.add("light");
   }
+
 
   function updateThemeIcon() {
 
@@ -39,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
   }
+
 
   updateThemeIcon();
 
@@ -62,8 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
+
   let cursorX = mouseX;
   let cursorY = mouseY;
+
 
   window.addEventListener("mousemove", (event) => {
 
@@ -85,6 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
+
   animateCursor();
 
 
@@ -92,15 +148,23 @@ document.addEventListener("DOMContentLoaded", () => {
     "a, button, .project"
   );
 
+
   interactiveElements.forEach((element) => {
 
     element.addEventListener("mouseenter", () => {
 
-      if (element.classList.contains("project")) {
+      if (
+        element.classList.contains("project") ||
+        element.classList.contains("intro-enter") ||
+        element.classList.contains("intro-skip")
+      ) {
+
         cursor.classList.add("active");
+
       }
 
     });
+
 
     element.addEventListener("mouseleave", () => {
 
@@ -116,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateScrollProgress() {
 
     const scrollTop = window.scrollY;
+
     const documentHeight =
       document.documentElement.scrollHeight - window.innerHeight;
 
@@ -134,9 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateHeader() {
 
     if (window.scrollY > 40) {
+
       header.classList.add("scrolled");
+
     } else {
+
       header.classList.remove("scrolled");
+
     }
 
   }
@@ -145,26 +214,34 @@ document.addEventListener("DOMContentLoaded", () => {
   /* REVEAL */
 
   const revealObserver = new IntersectionObserver(
+
     (entries) => {
 
       entries.forEach((entry) => {
 
         if (entry.isIntersecting) {
+
           entry.target.classList.add("visible");
+
           revealObserver.unobserve(entry.target);
+
         }
 
       });
 
     },
+
     {
       threshold: 0.12
     }
+
   );
 
 
   revealElements.forEach((element) => {
+
     revealObserver.observe(element);
+
   });
 
 
@@ -174,7 +251,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "#work, #about, #contact"
   );
 
+
   const sectionObserver = new IntersectionObserver(
+
     (entries) => {
 
       entries.forEach((entry) => {
@@ -182,15 +261,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (entry.isIntersecting) {
 
           navLinks.forEach((link) => {
+
             link.classList.remove("active");
+
           });
+
 
           const activeLink = document.querySelector(
             `.main-nav a[data-section="${entry.target.id}"]`
           );
 
+
           if (activeLink) {
+
             activeLink.classList.add("active");
+
           }
 
         }
@@ -198,14 +283,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
     },
+
     {
       rootMargin: "-35% 0px -55% 0px"
     }
+
   );
 
 
   sections.forEach((section) => {
+
     sectionObserver.observe(section);
+
   });
 
 
@@ -217,17 +306,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const targetId = link.getAttribute("href");
 
+
       if (!targetId || targetId === "#") {
         return;
       }
 
+
       const target = document.querySelector(targetId);
+
 
       if (!target) {
         return;
       }
 
+
       event.preventDefault();
+
 
       target.scrollIntoView({
         behavior: "smooth",
@@ -244,14 +338,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroImage = document.querySelector(".hero-image");
   const heroTitle = document.querySelector(".hero-title");
 
+
   window.addEventListener("scroll", () => {
 
     const scroll = window.scrollY;
+
 
     if (scroll < window.innerHeight) {
 
       heroImage.style.transform =
         `scale(1.06) translateY(${scroll * 0.08}px)`;
+
 
       heroTitle.style.transform =
         `translateY(${scroll * 0.035}px)`;
@@ -271,7 +368,9 @@ document.addEventListener("DOMContentLoaded", () => {
       updateHeader();
 
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
 
