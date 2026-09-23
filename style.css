@@ -343,3 +343,125 @@ footer {
         margin-bottom: 8px;
     }
 }
+/* THEME SYSTEM */
+
+:root {
+    --background: #f5f4f0;
+    --text: #111111;
+    --muted: #777777;
+    --line: #d9d8d3;
+    --accent: #6c3cff;
+}
+
+body.dark {
+    --background: #0d0b10;
+    --text: #f5f3f8;
+    --muted: #9d99a5;
+    --line: #2b2731;
+    --accent: #9b7aff;
+}
+
+body {
+    transition:
+        background-color 0.5s ease,
+        color 0.5s ease;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.theme-toggle {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--text);
+    color: var(--background);
+    transform: rotate(25deg);
+}
+
+.hero h1 {
+    color: var(--text);
+}
+
+.hero h1::selection,
+.about-text::selection,
+.contact-title::selection {
+    background: var(--accent);
+    color: white;
+}
+
+.eyebrow {
+    color: var(--accent);
+}
+
+.project-image {
+    background: #e5e2ea;
+}
+
+body.dark .project-image {
+    background: #1b1721;
+}
+
+.project:hover .project-name {
+    color: var(--accent);
+}
+
+.service:hover {
+    color: var(--accent);
+}
+
+.contact-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+.section-header {
+    border-color: var(--line);
+}
+
+.services-list {
+    border-color: var(--line);
+}
+
+.service {
+    border-color: var(--line);
+}
+
+footer {
+    border-color: var(--line);
+}
+
+@media (max-width: 800px) {
+
+    .nav-right {
+        gap: 15px;
+    }
+
+    .theme-toggle {
+        width: 34px;
+        height: 34px;
+    }
+
+}
