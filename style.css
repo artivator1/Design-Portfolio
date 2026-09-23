@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --background: #f5f4f0;
+    --text: #111111;
+    --muted: #777777;
+    --line: #d9d8d3;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.container {
+    width: min(1280px, calc(100% - 80px));
+    margin: 0 auto;
+}
+
+/* NAVIGATION */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0;
+    font-size: 14px;
+}
+
+.logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.06em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    color: #555555;
+}
+
+.nav-links a {
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text);
+}
+
+/* HERO */
+
+.hero {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 100px 0 90px;
+}
+
+.eyebrow {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 28px;
+}
+
+.hero h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(56px, 8.5vw, 132px);
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.075em;
+    max-width: 1150px;
+}
+
+.hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 70px;
+    gap: 40px;
+}
+
+.hero-description {
+    max-width: 440px;
+    font-size: 18px;
+    color: #555555;
+}
+
+.scroll-note {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* SECTION */
+
+.section {
+    padding: 120px 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    margin-bottom: 60px;
+}
+
+.section-label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.section-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(40px, 5vw, 72px);
+    letter-spacing: -0.06em;
+    font-weight: 600;
+}
+
+/* WORK */
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 70px 28px;
+}
+
+.project {
+    cursor: pointer;
+}
+
+.project-image {
+    aspect-ratio: 4 / 3;
+    background: #deddd8;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+    transition: background 0.4s ease;
+}
+
+.project:hover .project-image::after {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.project-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 16px;
+}
+
+.project-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+}
+
+.project-type {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: right;
+}
+
+/* SERVICES */
+
+.services {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+}
+
+.services-list {
+    border-top: 1px solid var(--line);
+}
+
+.service {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    font-family: 'Manrope', sans-serif;
+    font-size: 24px;
+    letter-spacing: -0.04em;
+}
+
+.service-number {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* ABOUT */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+}
+
+.about-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(30px, 4vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.055em;
+    max-width: 850px;
+}
+
+/* CONTACT */
+
+.contact {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(60px, 10vw, 150px);
+    line-height: 0.88;
+    letter-spacing: -0.08em;
+    max-width: 1100px;
+}
+
+.contact-link {
+    display: inline-block;
+    font-size: 20px;
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 5px;
+    margin-top: 40px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--line);
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .container {
+        width: min(100% - 40px, 1280px);
+    }
+
+    nav {
+        padding: 22px 0;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .hero {
+        min-height: 75vh;
+        padding: 80px 0 60px;
+    }
+
+    .hero h1 {
+        font-size: clamp(50px, 15vw, 90px);
+    }
+
+    .hero-bottom {
+        display: block;
+        margin-top: 45px;
+    }
+
+    .scroll-note {
+        margin-top: 30px;
+    }
+
+    .section {
+        padding: 80px 0;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .services,
+    .about {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .service {
+        font-size: 20px;
+    }
+
+    .contact {
+        min-height: 65vh;
+    }
+
+    footer {
+        display: block;
+    }
+
+    footer span {
+        display: block;
+        margin-bottom: 8px;
+    }
+}
