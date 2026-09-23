@@ -13,13 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.querySelector(".theme-toggle");
   const themeIcon = document.querySelector(".theme-icon");
 
-  const revealElements = document.querySelectorAll(".reveal");
-  const navLinks = document.querySelectorAll(".main-nav a");
+  const revealElements =
+    document.querySelectorAll(".reveal");
 
-  const services = document.querySelectorAll(".service-card");
+  const navLinks =
+    document.querySelectorAll(".main-nav a");
+
+  const services =
+    document.querySelectorAll(".service-card");
 
 
-  /* INTRO */
+  /* =========================================================
+     INTRO
+  ========================================================= */
 
   const introSeen =
     sessionStorage.getItem("portfolio-intro-seen");
@@ -78,18 +84,13 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
 
-  /* THEME */
+  /* =========================================================
+     THEME
+  ========================================================= */
 
   const savedTheme =
     localStorage.getItem("portfolio-theme");
 
-
-  /*
-    DARK MODE IS THE DEFAULT.
-
-    Only switch to light mode if the user
-    has previously selected light mode.
-  */
 
   if (savedTheme === "light") {
 
@@ -108,6 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   function updateThemeIcon() {
+
+    if (!themeIcon || !themeToggle) {
+      return;
+    }
 
     if (body.classList.contains("light")) {
 
@@ -159,10 +164,15 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
 
-  /* CURSOR */
+  /* =========================================================
+     CURSOR
+  ========================================================= */
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
+  let mouseX =
+    window.innerWidth / 2;
+
+  let mouseY =
+    window.innerHeight / 2;
 
   let cursorX = mouseX;
   let cursorY = mouseY;
@@ -206,7 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  animateCursor();
+  if (cursor) {
+    animateCursor();
+  }
 
 
   document
@@ -238,7 +250,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "mouseleave",
         () => {
 
-          cursor?.classList.remove("active");
+          cursor?.classList.remove(
+            "active"
+          );
 
         }
       );
@@ -246,7 +260,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-  /* SERVICE CARD MOVEMENT */
+  /* =========================================================
+     SERVICE CARD MOVEMENT
+  ========================================================= */
 
   services.forEach(card => {
 
@@ -295,7 +311,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* SCROLL PROGRESS */
+  /* =========================================================
+     SCROLL PROGRESS
+  ========================================================= */
 
   function updateScrollProgress() {
 
@@ -324,7 +342,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* HEADER */
+  /* =========================================================
+     HEADER
+  ========================================================= */
 
   function updateHeader() {
 
@@ -346,7 +366,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* REVEAL */
+  /* =========================================================
+     REVEAL
+  ========================================================= */
 
   const revealObserver =
     new IntersectionObserver(
@@ -385,13 +407,48 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* ABOUT PHOTO CARD */
+  /* =========================================================
+     ABOUT PHOTO CARD
+  ========================================================= */
 
   const aboutSection =
-    document.querySelector(".about-section");
+    document.querySelector(
+      ".about-section"
+    );
 
   const aboutPhotoCard =
-    document.querySelector(".about-photo-card");
+    document.querySelector(
+      ".about-photo-card"
+    );
+
+  const aboutCopy =
+    document.querySelector(
+      ".about-copy"
+    );
+
+
+  /*
+    IMPORTANT:
+
+    The card is physically moved inside
+    .about-copy and placed after the
+    final paragraph.
+
+    This means it becomes part of the
+    normal document flow and can never
+    cover the About text.
+  */
+
+  if (
+    aboutPhotoCard &&
+    aboutCopy
+  ) {
+
+    aboutCopy.appendChild(
+      aboutPhotoCard
+    );
+
+  }
 
 
   if (
@@ -436,7 +493,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* ACTIVE NAVIGATION */
+  /* =========================================================
+     ACTIVE NAVIGATION
+  ========================================================= */
 
   const sections =
     document.querySelectorAll(
@@ -493,7 +552,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* SMOOTH SCROLL */
+  /* =========================================================
+     SMOOTH SCROLL
+  ========================================================= */
 
   document
     .querySelectorAll(
@@ -544,7 +605,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-  /* HERO PARALLAX */
+  /* =========================================================
+     HERO PARALLAX
+  ========================================================= */
 
   const heroImage =
     document.querySelector(
@@ -596,7 +659,9 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
 
-  /* GLOBAL SCROLL */
+  /* =========================================================
+     GLOBAL SCROLL
+  ========================================================= */
 
   window.addEventListener(
     "scroll",
