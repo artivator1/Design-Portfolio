@@ -1,18 +1,18 @@
 @font-face {
   font-family: "Rugis";
-  src: url("./Rugis.ttf?v=8") format("truetype");
+  src: url("./Rugis.ttf?v=9") format("truetype");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Aquatico";
-  src: url("./Aquatico-Regular.otf?v=2") format("opentype");
+  src: url("./Aquatico-Regular.otf?v=3") format("opentype");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Quera";
-  src: url("./Quera.otf?v=1") format("opentype");
+  src: url("./Quera.otf?v=2") format("opentype");
   font-display: swap;
 }
 
@@ -25,6 +25,23 @@
   --soft-line: rgba(255,255,255,0.08);
   --glass: rgba(255,255,255,0.065);
   --glass-strong: rgba(255,255,255,0.105);
+  --glass-border: rgba(255,255,255,0.15);
+  --card-bg: rgba(255,255,255,0.055);
+  --header-bg: rgba(7,7,7,0.55);
+}
+
+
+body.light {
+  --bg: #eeeeec;
+  --text: #111111;
+  --muted: #686868;
+  --line: rgba(0,0,0,0.15);
+  --soft-line: rgba(0,0,0,0.08);
+  --glass: rgba(255,255,255,0.48);
+  --glass-strong: rgba(255,255,255,0.65);
+  --glass-border: rgba(0,0,0,0.12);
+  --card-bg: rgba(255,255,255,0.42);
+  --header-bg: rgba(238,238,236,0.62);
 }
 
 
@@ -46,6 +63,9 @@ body {
   font-family: "Quera", Arial, sans-serif;
   overflow-x: hidden;
   cursor: none;
+  transition:
+    background 0.55s ease,
+    color 0.55s ease;
 }
 
 
@@ -66,8 +86,8 @@ button {
 
 
 ::selection {
-  background: white;
-  color: black;
+  background: var(--text);
+  color: var(--bg);
 }
 
 
@@ -243,6 +263,7 @@ button {
   bottom: 2%;
   padding: 15px 18px;
   border: 1px solid rgba(255,255,255,.18);
+  border-radius: 18px;
   background: rgba(255,255,255,.07);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -328,68 +349,145 @@ button {
 
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 
 @keyframes statementOne {
-  0% { opacity: 0; transform: translateY(70px) scale(.92); }
-  12%, 25% { opacity: 1; transform: translateY(0) scale(1); }
-  38%, 100% { opacity: 0; transform: translateY(-70px) scale(1.08); }
+  0% {
+    opacity: 0;
+    transform: translateY(70px) scale(.92);
+  }
+
+  12%,25% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  38%,100% {
+    opacity: 0;
+    transform: translateY(-70px) scale(1.08);
+  }
 }
 
 
 @keyframes statementTwo {
-  0%, 18% { opacity: 0; transform: translateY(70px) scale(.92); }
-  30%, 43% { opacity: 1; transform: translateY(0) scale(1); }
-  56%, 100% { opacity: 0; transform: translateY(-70px) scale(1.08); }
+  0%,18% {
+    opacity: 0;
+    transform: translateY(70px) scale(.92);
+  }
+
+  30%,43% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  56%,100% {
+    opacity: 0;
+    transform: translateY(-70px) scale(1.08);
+  }
 }
 
 
 @keyframes statementThree {
-  0%, 36% { opacity: 0; transform: translateY(70px) scale(.92); }
-  48%, 64% { opacity: 1; transform: translateY(0) scale(1); }
-  76%, 100% { opacity: 0; transform: translateY(-70px) scale(1.08); }
+  0%,36% {
+    opacity: 0;
+    transform: translateY(70px) scale(.92);
+  }
+
+  48%,64% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  76%,100% {
+    opacity: 0;
+    transform: translateY(-70px) scale(1.08);
+  }
 }
 
 
 @keyframes progress {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
 }
 
 
 @keyframes ringSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 
 @keyframes orbOne {
-  from { transform: translate(-30px,-20px) scale(.9); }
-  to { transform: translate(100px,80px) scale(1.25); }
+  from {
+    transform: translate(-30px,-20px) scale(.9);
+  }
+
+  to {
+    transform: translate(100px,80px) scale(1.25);
+  }
 }
 
 
 @keyframes orbTwo {
-  from { transform: translate(30px,30px) scale(1); }
-  to { transform: translate(-100px,-70px) scale(.8); }
+  from {
+    transform: translate(30px,30px) scale(1);
+  }
+
+  to {
+    transform: translate(-100px,-70px) scale(.8);
+  }
 }
 
 
 @keyframes orbThree {
-  from { transform: translate(-60px,20px); }
-  to { transform: translate(80px,-80px); }
+  from {
+    transform: translate(-60px,20px);
+  }
+
+  to {
+    transform: translate(80px,-80px);
+  }
 }
 
 
 @keyframes noiseMove {
-  0% { transform: translate(0,0); }
-  25% { transform: translate(3%,-2%); }
-  50% { transform: translate(-2%,3%); }
-  75% { transform: translate(2%,2%); }
-  100% { transform: translate(-3%,-2%); }
+  0% {
+    transform: translate(0,0);
+  }
+
+  25% {
+    transform: translate(3%,-2%);
+  }
+
+  50% {
+    transform: translate(-2%,3%);
+  }
+
+  75% {
+    transform: translate(2%,2%);
+  }
+
+  100% {
+    transform: translate(-3%,-2%);
+  }
 }
 
 
@@ -439,6 +537,19 @@ button {
 }
 
 
+/* SCROLL */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--text);
+  z-index: 9998;
+}
+
+
 /* HEADER */
 
 .site-header {
@@ -455,14 +566,15 @@ button {
   transition:
     height .4s ease,
     padding .4s ease,
-    background .4s ease;
+    background .4s ease,
+    color .4s ease;
 }
 
 
 .site-header.scrolled {
   height: 78px;
   padding: 17px 42px;
-  background: rgba(7,7,7,.55);
+  background: var(--header-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--soft-line);
@@ -544,7 +656,7 @@ button {
   bottom: -5px;
   width: 0;
   height: 1px;
-  background: white;
+  background: currentColor;
   transition: width .3s ease;
 }
 
@@ -559,30 +671,21 @@ button {
   width: 43px;
   height: 43px;
   border-radius: 50%;
-  background: rgba(255,255,255,.05);
-  border: 1px solid var(--line);
-  color: white;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
   cursor: none;
   backdrop-filter: blur(12px);
-  transition: transform .3s ease;
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    transform .3s ease,
+    background .4s ease,
+    border-color .4s ease;
 }
 
 
 .theme-toggle:hover {
   transform: rotate(30deg);
-}
-
-
-/* SCROLL */
-
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: white;
-  z-index: 9998;
 }
 
 
@@ -601,7 +704,7 @@ button {
 .hero-image {
   position: absolute;
   inset: -5%;
-  background: url("./hero.jpg?v=8") center / cover no-repeat;
+  background: url("./hero.jpg?v=9") center / cover no-repeat;
   filter: blur(5px);
   transform: scale(1.07);
 }
@@ -650,6 +753,7 @@ button {
   padding: 13px 17px;
   display: flex;
   gap: 18px;
+  border-radius: 999px;
   background: rgba(255,255,255,.07);
   border: 1px solid rgba(255,255,255,.16);
   backdrop-filter: blur(18px);
@@ -683,8 +787,8 @@ button {
 .hero-title span {
   display: block;
   font-family: "Rugis", Arial, sans-serif;
-  font-size: clamp(90px, 14.5vw, 220px);
-  letter-spacing: -.065em;
+  font-size: clamp(82px, 12.8vw, 195px);
+  letter-spacing: -.05em;
   white-space: nowrap;
 }
 
@@ -694,9 +798,6 @@ button {
   inset: 0;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255,255,255,.95);
-  transition:
-    color 1s cubic-bezier(.77,0,.175,1),
-    -webkit-text-stroke 1s ease;
 }
 
 
@@ -708,6 +809,7 @@ button {
 
 
 @keyframes heroSolid {
+
   0% {
     opacity: 0;
     transform: scale(1.04);
@@ -721,6 +823,7 @@ button {
     opacity: 1;
     transform: scale(1);
   }
+
 }
 
 
@@ -738,8 +841,8 @@ button {
   text-align: center;
   font-family: "Quera", Arial, sans-serif;
   font-size: clamp(17px, 1.45vw, 22px);
-  line-height: 1.25;
-  letter-spacing: -.02em;
+  line-height: 1.3;
+  letter-spacing: .025em;
 }
 
 
@@ -825,8 +928,8 @@ button {
 .intro-copy p {
   font-family: "Quera", Arial, sans-serif;
   font-size: clamp(42px, 5vw, 80px);
-  line-height: .98;
-  letter-spacing: -.055em;
+  line-height: 1.02;
+  letter-spacing: .018em;
 }
 
 
@@ -876,8 +979,8 @@ button {
   font-family: "Quera", Arial, sans-serif;
   font-size: clamp(30px, 4vw, 62px);
   font-weight: 400;
-  line-height: .95;
-  letter-spacing: -.05em;
+  line-height: 1;
+  letter-spacing: .012em;
   transition: transform .45s ease;
 }
 
@@ -885,6 +988,7 @@ button {
 .project-main p {
   font-family: "Quera", Arial, sans-serif;
   font-size: 12px;
+  letter-spacing: .03em;
   color: var(--muted);
   margin-top: 11px;
 }
@@ -930,9 +1034,11 @@ button {
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
+  border-radius: 24px;
   background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.18);
+  border: 1px solid var(--glass-border);
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   transition:
     opacity .45s ease,
     transform .45s ease;
@@ -943,7 +1049,7 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("./hero.jpg?v=8") center / cover;
+  background: url("./hero.jpg?v=9") center / cover;
   opacity: .3;
   filter: grayscale(1);
 }
@@ -996,8 +1102,8 @@ button {
 .statement p {
   font-family: "Quera", Arial, sans-serif;
   font-size: clamp(55px, 7vw, 115px);
-  line-height: .9;
-  letter-spacing: -.065em;
+  line-height: .94;
+  letter-spacing: .015em;
 }
 
 
@@ -1006,7 +1112,7 @@ button {
 .services {
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
 
@@ -1015,7 +1121,8 @@ button {
   position: relative;
   overflow: hidden;
   padding: 30px;
-  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 28px;
+  border: 1px solid var(--glass-border);
   background:
     linear-gradient(
       135deg,
@@ -1028,6 +1135,16 @@ button {
     transform .5s cubic-bezier(.2,.8,.2,1),
     background .5s ease,
     border-color .5s ease;
+}
+
+
+body.light .service-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.62),
+      rgba(255,255,255,.3)
+    );
 }
 
 
@@ -1117,8 +1234,8 @@ button {
   font-family: "Quera", Arial, sans-serif;
   font-size: clamp(35px, 4vw, 62px);
   font-weight: 400;
-  line-height: .9;
-  letter-spacing: -.055em;
+  line-height: .95;
+  letter-spacing: .015em;
   transition: transform .5s ease;
 }
 
@@ -1133,7 +1250,8 @@ button {
   margin-top: 18px;
   font-family: "Quera", Arial, sans-serif;
   font-size: 15px;
-  line-height: 1.35;
+  line-height: 1.45;
+  letter-spacing: .025em;
   color: var(--muted);
   opacity: .55;
   transform: translateY(10px);
@@ -1181,8 +1299,8 @@ button {
 .about-title h2 {
   font-family: "Quera", Arial, sans-serif;
   font-size: clamp(52px, 7vw, 110px);
-  line-height: .88;
-  letter-spacing: -.065em;
+  line-height: .93;
+  letter-spacing: .01em;
   font-weight: 400;
 }
 
@@ -1195,7 +1313,8 @@ button {
 .about-copy p {
   font-family: "Quera", Arial, sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.55;
+  letter-spacing: .025em;
   color: var(--muted);
   margin-bottom: 35px;
 }
@@ -1204,8 +1323,8 @@ button {
 .about-copy .large-copy {
   color: var(--text);
   font-size: clamp(25px, 2.5vw, 38px);
-  line-height: 1.05;
-  letter-spacing: -.04em;
+  line-height: 1.12;
+  letter-spacing: .015em;
 }
 
 
@@ -1327,6 +1446,7 @@ button {
     right: auto;
     left: 0;
     bottom: 0;
+    border-radius: 14px;
   }
 
 
@@ -1400,7 +1520,7 @@ button {
 
 
   .hero-title span {
-    font-size: 19vw;
+    font-size: 18vw;
     white-space: normal;
   }
 
@@ -1413,6 +1533,7 @@ button {
   .hero-description {
     max-width: 340px;
     font-size: 17px;
+    letter-spacing: .025em;
   }
 
 
@@ -1426,6 +1547,7 @@ button {
   .hero-glass {
     top: 105px;
     right: 20px;
+    border-radius: 999px;
   }
 
 
@@ -1459,6 +1581,7 @@ button {
 
   .intro-copy p {
     font-size: 42px;
+    letter-spacing: .018em;
   }
 
 
@@ -1481,6 +1604,7 @@ button {
 
   .project-main p {
     font-size: 10px;
+    letter-spacing: .025em;
   }
 
 
@@ -1512,6 +1636,7 @@ button {
 
   .service-card {
     min-height: 310px;
+    border-radius: 22px;
   }
 
 
