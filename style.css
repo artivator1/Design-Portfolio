@@ -768,7 +768,7 @@ button {
   position: relative;
   z-index: 2;
   width: min(1450px, calc(100% - 84px));
-  height: calc(100svh - 90px);
+  height: calc(100svh - 120px);
   margin-top: 80px;
   display: flex;
   flex-direction: column;
@@ -787,7 +787,7 @@ button {
 .hero-title span {
   display: block;
   font-family: "Rugis", Arial, sans-serif;
-  font-size: clamp(82px, 12.8vw, 195px);
+  font-size: clamp(82px, 12.8vw, 150px);
   letter-spacing: -.05em;
   white-space: nowrap;
 }
