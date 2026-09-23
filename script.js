@@ -188,11 +188,15 @@ document.addEventListener("DOMContentLoaded", () => {
       (mouseY - cursorY) * .16;
 
 
-    cursor.style.left =
-      `${cursorX}px`;
+    if (cursor) {
 
-    cursor.style.top =
-      `${cursorY}px`;
+      cursor.style.left =
+        `${cursorX}px`;
+
+      cursor.style.top =
+        `${cursorY}px`;
+
+    }
 
 
     requestAnimationFrame(
@@ -222,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
             element.classList.contains("intro-skip")
           ) {
 
-            cursor.classList.add("active");
+            cursor?.classList.add("active");
 
           }
 
@@ -234,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "mouseleave",
         () => {
 
-          cursor.classList.remove("active");
+          cursor?.classList.remove("active");
 
         }
       );
@@ -310,8 +314,12 @@ document.addEventListener("DOMContentLoaded", () => {
         : 0;
 
 
-    progress.style.width =
-      `${percentage}%`;
+    if (progress) {
+
+      progress.style.width =
+        `${percentage}%`;
+
+    }
 
   }
 
@@ -319,6 +327,11 @@ document.addEventListener("DOMContentLoaded", () => {
   /* HEADER */
 
   function updateHeader() {
+
+    if (!header) {
+      return;
+    }
+
 
     if (window.scrollY > 40) {
 
@@ -370,6 +383,57 @@ document.addEventListener("DOMContentLoaded", () => {
     revealObserver.observe(element);
 
   });
+
+
+  /* ABOUT PHOTO CARD */
+
+  const aboutSection =
+    document.querySelector(".about-section");
+
+  const aboutPhotoCard =
+    document.querySelector(".about-photo-card");
+
+
+  if (
+    aboutSection &&
+    aboutPhotoCard
+  ) {
+
+    const aboutPhotoObserver =
+      new IntersectionObserver(
+
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              aboutPhotoCard.classList.add(
+                "visible"
+              );
+
+              aboutPhotoObserver.unobserve(
+                aboutSection
+              );
+
+            }
+
+          });
+
+        },
+
+        {
+          threshold: .25
+        }
+
+      );
+
+
+    aboutPhotoObserver.observe(
+      aboutSection
+    );
+
+  }
 
 
   /* ACTIVE NAVIGATION */
@@ -507,13 +571,21 @@ document.addEventListener("DOMContentLoaded", () => {
         window.innerHeight
       ) {
 
-        heroImage.style.transform =
-          `scale(1.07)
-           translateY(${scroll * .08}px)`;
+        if (heroImage) {
+
+          heroImage.style.transform =
+            `scale(1.07)
+             translateY(${scroll * .08}px)`;
+
+        }
 
 
-        heroTitle.style.transform =
-          `translateY(${scroll * .035}px)`;
+        if (heroTitle) {
+
+          heroTitle.style.transform =
+            `translateY(${scroll * .035}px)`;
+
+        }
 
       }
 
