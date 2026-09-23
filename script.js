@@ -21,20 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* INTRO */
 
-  const introSeen = sessionStorage.getItem("portfolio-intro-seen");
+  const introSeen =
+    sessionStorage.getItem("portfolio-intro-seen");
 
 
   function closeIntro() {
 
-    if (!intro) return;
+    if (!intro) {
+      return;
+    }
 
     intro.classList.add("exit");
+
     body.classList.remove("intro-active");
 
-    sessionStorage.setItem("portfolio-intro-seen", "true");
+    sessionStorage.setItem(
+      "portfolio-intro-seen",
+      "true"
+    );
 
     setTimeout(() => {
+
       intro.style.display = "none";
+
     }, 1300);
 
   }
@@ -43,37 +52,66 @@ document.addEventListener("DOMContentLoaded", () => {
   if (introSeen === "true") {
 
     intro.style.display = "none";
+
     body.classList.remove("intro-active");
 
   } else {
 
     setTimeout(() => {
+
       closeIntro();
+
     }, 6500);
 
   }
 
 
-  enterPortfolio?.addEventListener("click", closeIntro);
-  skipIntro?.addEventListener("click", closeIntro);
+  enterPortfolio?.addEventListener(
+    "click",
+    closeIntro
+  );
+
+
+  skipIntro?.addEventListener(
+    "click",
+    closeIntro
+  );
 
 
   /* THEME */
 
-  const savedTheme = localStorage.getItem("portfolio-theme");
+  const savedTheme =
+    localStorage.getItem("portfolio-theme");
 
 
   if (savedTheme === "light") {
+
     body.classList.add("light");
+
   }
 
 
   function updateThemeIcon() {
 
-    themeIcon.textContent =
-      body.classList.contains("light")
-        ? "◐"
-        : "◌";
+    if (body.classList.contains("light")) {
+
+      themeIcon.textContent = "◐";
+
+      themeToggle.setAttribute(
+        "aria-label",
+        "Switch to dark mode"
+      );
+
+    } else {
+
+      themeIcon.textContent = "◌";
+
+      themeToggle.setAttribute(
+        "aria-label",
+        "Switch to light mode"
+      );
+
+    }
 
   }
 
@@ -81,20 +119,28 @@ document.addEventListener("DOMContentLoaded", () => {
   updateThemeIcon();
 
 
-  themeToggle?.addEventListener("click", () => {
+  themeToggle?.addEventListener(
+    "click",
+    () => {
 
-    body.classList.toggle("light");
+      body.classList.toggle("light");
 
-    localStorage.setItem(
-      "portfolio-theme",
-      body.classList.contains("light")
-        ? "light"
-        : "dark"
-    );
+      const currentTheme =
+        body.classList.contains("light")
+          ? "light"
+          : "dark";
 
-    updateThemeIcon();
 
-  });
+      localStorage.setItem(
+        "portfolio-theme",
+        currentTheme
+      );
+
+
+      updateThemeIcon();
+
+    }
+  );
 
 
   /* CURSOR */
@@ -106,23 +152,36 @@ document.addEventListener("DOMContentLoaded", () => {
   let cursorY = mouseY;
 
 
-  window.addEventListener("mousemove", event => {
+  window.addEventListener(
+    "mousemove",
+    event => {
 
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+      mouseX = event.clientX;
+      mouseY = event.clientY;
 
-  });
+    }
+  );
 
 
   function animateCursor() {
 
-    cursorX += (mouseX - cursorX) * .16;
-    cursorY += (mouseY - cursorY) * .16;
+    cursorX +=
+      (mouseX - cursorX) * .16;
 
-    cursor.style.left = `${cursorX}px`;
-    cursor.style.top = `${cursorY}px`;
+    cursorY +=
+      (mouseY - cursorY) * .16;
 
-    requestAnimationFrame(animateCursor);
+
+    cursor.style.left =
+      `${cursorX}px`;
+
+    cursor.style.top =
+      `${cursorY}px`;
+
+
+    requestAnimationFrame(
+      animateCursor
+    );
 
   }
 
@@ -131,69 +190,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   document
-    .querySelectorAll("a, button, .project, .service-card")
+    .querySelectorAll(
+      "a, button, .project, .service-card"
+    )
     .forEach(element => {
 
-      element.addEventListener("mouseenter", () => {
+      element.addEventListener(
+        "mouseenter",
+        () => {
 
-        if (
-          element.classList.contains("project") ||
-          element.classList.contains("service-card") ||
-          element.classList.contains("intro-enter") ||
-          element.classList.contains("intro-skip")
-        ) {
+          if (
+            element.classList.contains("project") ||
+            element.classList.contains("service-card") ||
+            element.classList.contains("intro-enter") ||
+            element.classList.contains("intro-skip")
+          ) {
 
-          cursor.classList.add("active");
+            cursor.classList.add("active");
+
+          }
 
         }
+      );
 
-      });
 
+      element.addEventListener(
+        "mouseleave",
+        () => {
 
-      element.addEventListener("mouseleave", () => {
+          cursor.classList.remove("active");
 
-        cursor.classList.remove("active");
-
-      });
+        }
+      );
 
     });
 
 
-  /* SERVICE CARD MOUSE MOVEMENT */
+  /* SERVICE CARD MOVEMENT */
 
   services.forEach(card => {
 
-    card.addEventListener("mousemove", event => {
+    card.addEventListener(
+      "mousemove",
+      event => {
 
-      const rect = card.getBoundingClientRect();
-
-      const x =
-        event.clientX - rect.left;
-
-      const y =
-        event.clientY - rect.top;
-
-      const rotateX =
-        ((y / rect.height) - .5) * -5;
-
-      const rotateY =
-        ((x / rect.width) - .5) * 5;
-
-      card.style.transform =
-        `perspective(900px)
-         rotateX(${rotateX}deg)
-         rotateY(${rotateY}deg)
-         translateY(-8px)
-         scale(1.012)`;
-
-    });
+        const rect =
+          card.getBoundingClientRect();
 
 
-    card.addEventListener("mouseleave", () => {
+        const x =
+          event.clientX - rect.left;
 
-      card.style.transform = "";
+        const y =
+          event.clientY - rect.top;
 
-    });
+
+        const rotateX =
+          ((y / rect.height) - .5) * -5;
+
+        const rotateY =
+          ((x / rect.width) - .5) * 5;
+
+
+        card.style.transform =
+          `perspective(900px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           translateY(-8px)
+           scale(1.012)`;
+
+      }
+    );
+
+
+    card.addEventListener(
+      "mouseleave",
+      () => {
+
+        card.style.transform = "";
+
+      }
+    );
 
   });
 
@@ -202,16 +279,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateScrollProgress() {
 
-    const scrollTop = window.scrollY;
+    const scrollTop =
+      window.scrollY;
+
 
     const height =
       document.documentElement.scrollHeight -
       window.innerHeight;
 
+
     const percentage =
       height > 0
         ? (scrollTop / height) * 100
         : 0;
+
 
     progress.style.width =
       `${percentage}%`;
@@ -224,9 +305,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateHeader() {
 
     if (window.scrollY > 40) {
+
       header.classList.add("scrolled");
+
     } else {
+
       header.classList.remove("scrolled");
+
     }
 
   }
@@ -243,9 +328,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (entry.isIntersecting) {
 
-            entry.target.classList.add("visible");
+            entry.target.classList.add(
+              "visible"
+            );
 
-            revealObserver.unobserve(entry.target);
+            revealObserver.unobserve(
+              entry.target
+            );
 
           }
 
@@ -267,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* ACTIVE NAV */
+  /* ACTIVE NAVIGATION */
 
   const sections =
     document.querySelectorAll(
@@ -285,7 +374,11 @@ document.addEventListener("DOMContentLoaded", () => {
           if (entry.isIntersecting) {
 
             navLinks.forEach(link => {
-              link.classList.remove("active");
+
+              link.classList.remove(
+                "active"
+              );
+
             });
 
 
@@ -295,7 +388,9 @@ document.addEventListener("DOMContentLoaded", () => {
               );
 
 
-            active?.classList.add("active");
+            active?.classList.add(
+              "active"
+            );
 
           }
 
@@ -304,7 +399,8 @@ document.addEventListener("DOMContentLoaded", () => {
       },
 
       {
-        rootMargin: "-35% 0px -55% 0px"
+        rootMargin:
+          "-35% 0px -55% 0px"
       }
 
     );
@@ -320,37 +416,50 @@ document.addEventListener("DOMContentLoaded", () => {
   /* SMOOTH SCROLL */
 
   document
-    .querySelectorAll('a[href^="#"]')
+    .querySelectorAll(
+      'a[href^="#"]'
+    )
     .forEach(link => {
 
-      link.addEventListener("click", event => {
+      link.addEventListener(
+        "click",
+        event => {
 
-        const targetId =
-          link.getAttribute("href");
+          const targetId =
+            link.getAttribute("href");
 
-        if (!targetId || targetId === "#") {
-          return;
+
+          if (
+            !targetId ||
+            targetId === "#"
+          ) {
+
+            return;
+
+          }
+
+
+          const target =
+            document.querySelector(
+              targetId
+            );
+
+
+          if (!target) {
+            return;
+          }
+
+
+          event.preventDefault();
+
+
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
         }
-
-
-        const target =
-          document.querySelector(targetId);
-
-
-        if (!target) {
-          return;
-        }
-
-
-        event.preventDefault();
-
-
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      });
+      );
 
     });
 
@@ -358,23 +467,33 @@ document.addEventListener("DOMContentLoaded", () => {
   /* HERO PARALLAX */
 
   const heroImage =
-    document.querySelector(".hero-image");
+    document.querySelector(
+      ".hero-image"
+    );
+
 
   const heroTitle =
-    document.querySelector(".hero-title");
+    document.querySelector(
+      ".hero-title"
+    );
 
 
   window.addEventListener(
     "scroll",
     () => {
 
-      const scroll = window.scrollY;
+      const scroll =
+        window.scrollY;
 
 
-      if (scroll < window.innerHeight) {
+      if (
+        scroll <
+        window.innerHeight
+      ) {
 
         heroImage.style.transform =
-          `scale(1.07) translateY(${scroll * .08}px)`;
+          `scale(1.07)
+           translateY(${scroll * .08}px)`;
 
 
         heroTitle.style.transform =
@@ -389,13 +508,14 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
 
-  /* SCROLL */
+  /* GLOBAL SCROLL */
 
   window.addEventListener(
     "scroll",
     () => {
 
       updateScrollProgress();
+
       updateHeader();
 
     },
@@ -406,6 +526,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   updateScrollProgress();
+
   updateHeader();
 
 });
