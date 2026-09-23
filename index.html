@@ -1,1959 +1,916 @@
-@font-face {
-  font-family: "Rugis";
-  src: url("./Rugis.ttf?v=9") format("truetype");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Aquatico";
-  src: url("./Aquatico-Regular.otf?v=3") format("opentype");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Quera";
-  src: url("./Quera.otf?v=2") format("opentype");
-  font-display: swap;
-}
-
-
-:root {
-  --bg: #070707;
-  --text: #f5f5f5;
-  --muted: #999999;
-  --line: rgba(255,255,255,0.15);
-  --soft-line: rgba(255,255,255,0.08);
-  --glass: rgba(255,255,255,0.065);
-  --glass-strong: rgba(255,255,255,0.105);
-  --glass-border: rgba(255,255,255,0.15);
-  --card-bg: rgba(255,255,255,0.055);
-  --header-bg: rgba(7,7,7,0.55);
-}
-
-
-body.light {
-  --bg: #eeeeec;
-  --text: #111111;
-  --muted: #686868;
-  --line: rgba(0,0,0,0.15);
-  --soft-line: rgba(0,0,0,0.08);
-  --glass: rgba(255,255,255,0.48);
-  --glass-strong: rgba(255,255,255,0.65);
-  --glass-border: rgba(0,0,0,0.12);
-  --card-bg: rgba(255,255,255,0.42);
-  --header-bg: rgba(238,238,236,0.62);
-}
-
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
-html {
-  scroll-behavior: smooth;
-}
-
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Quera", Arial, sans-serif;
-  overflow-x: hidden;
-  cursor: none;
-  transition:
-    background 0.55s ease,
-    color 0.55s ease;
-}
-
-
-body.intro-active {
-  overflow: hidden;
-}
-
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-
-button {
-  font: inherit;
-}
-
-
-::selection {
-  background: var(--text);
-  color: var(--bg);
-}
-
-
-/* INTRO */
-
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  background: #070707;
-  color: white;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px 42px;
-  transition:
-    opacity 1.2s cubic-bezier(.77,0,.175,1),
-    visibility 1.2s;
-}
-
-
-.intro.exit {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-
-.intro-noise {
-  position: absolute;
-  inset: -50%;
-  opacity: 0.055;
-  pointer-events: none;
-  background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-  animation: noiseMove .25s steps(2) infinite;
-}
-
-
-.intro-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: .7;
-  pointer-events: none;
-}
-
-
-.orb-one {
-  width: 360px;
-  height: 360px;
-  background: #663cff;
-  left: 12%;
-  top: 18%;
-  animation: orbOne 7s ease-in-out infinite alternate;
-}
-
-
-.orb-two {
-  width: 300px;
-  height: 300px;
-  background: #ff315b;
-  right: 12%;
-  top: 30%;
-  animation: orbTwo 8s ease-in-out infinite alternate;
-}
-
-
-.orb-three {
-  width: 240px;
-  height: 240px;
-  background: #168cff;
-  left: 45%;
-  bottom: 4%;
-  animation: orbThree 6s ease-in-out infinite alternate;
-}
-
-
-.intro-top {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  justify-content: space-between;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 9px;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: fadeIn .8s ease .2s forwards;
-}
-
-
-.intro-stage {
-  position: relative;
-  z-index: 2;
-  height: 62vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.intro-kicker {
-  position: absolute;
-  top: 4%;
-  left: 0;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  letter-spacing: .1em;
-  opacity: 0;
-  animation: fadeIn .8s ease .7s forwards;
-}
-
-
-.intro-statement {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  font-family: "Rugis", Arial, sans-serif;
-  font-size: clamp(100px, 17vw, 250px);
-  line-height: .7;
-  letter-spacing: -.065em;
-  opacity: 0;
-}
-
-
-.statement-one {
-  animation: statementOne 4.8s cubic-bezier(.77,0,.175,1) .8s both;
-}
-
-
-.statement-two {
-  animation: statementTwo 4.8s cubic-bezier(.77,0,.175,1) 1.8s both;
-}
-
-
-.statement-three {
-  animation: statementThree 4.8s cubic-bezier(.77,0,.175,1) 2.8s both;
-}
-
-
-.intro-ring {
-  position: absolute;
-  width: clamp(180px, 24vw, 350px);
-  aspect-ratio: 1;
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 50%;
-  animation: ringSpin 8s linear infinite;
-}
-
-
-.intro-ring::before,
-.intro-ring::after {
-  content: "";
-  position: absolute;
-  inset: 14px;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 50%;
-}
-
-
-.intro-ring::after {
-  inset: 38%;
-  background: rgba(255,255,255,.1);
-  backdrop-filter: blur(10px);
-}
-
-
-.intro-glass {
-  position: absolute;
-  right: 0;
-  bottom: 2%;
-  padding: 15px 18px;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 18px;
-  background: rgba(255,255,255,.07);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  display: flex;
-  gap: 20px;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  letter-spacing: .09em;
-}
-
-
-.intro-bottom {
-  position: relative;
-  z-index: 4;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: end;
-  opacity: 0;
-  animation: fadeIn .8s ease 1.1s forwards;
-}
-
-
-.intro-location,
-.intro-skip,
-.intro-enter {
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: .09em;
-}
-
-
-.intro-enter,
-.intro-skip {
-  border: 0;
-  background: transparent;
-  color: white;
-  cursor: none;
-}
-
-
-.intro-enter {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-
-.intro-enter span:last-child {
-  font-family: Arial, sans-serif;
-  font-size: 17px;
-  transition: transform .35s ease;
-}
-
-
-.intro-enter:hover span:last-child {
-  transform: translate(5px,-5px);
-}
-
-
-.intro-skip {
-  justify-self: end;
-  color: rgba(255,255,255,.55);
-  transition: color .3s ease;
-}
-
-
-.intro-skip:hover {
-  color: white;
-}
-
-
-.intro-progress {
-  position: absolute;
-  left: 42px;
-  right: 42px;
-  bottom: 74px;
-  height: 1px;
-  background: rgba(255,255,255,.2);
-  transform-origin: left;
-  animation: progress 5.8s linear forwards;
-}
-
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-
-@keyframes statementOne {
-  0% {
-    opacity: 0;
-    transform: translateY(70px) scale(.92);
-  }
-
-  12%,25% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  38%,100% {
-    opacity: 0;
-    transform: translateY(-70px) scale(1.08);
-  }
-}
-
-
-@keyframes statementTwo {
-  0%,18% {
-    opacity: 0;
-    transform: translateY(70px) scale(.92);
-  }
-
-  30%,43% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  56%,100% {
-    opacity: 0;
-    transform: translateY(-70px) scale(1.08);
-  }
-}
-
-
-@keyframes statementThree {
-  0%,36% {
-    opacity: 0;
-    transform: translateY(70px) scale(.92);
-  }
-
-  48%,64% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  76%,100% {
-    opacity: 0;
-    transform: translateY(-70px) scale(1.08);
-  }
-}
-
-
-@keyframes progress {
-  from {
-    transform: scaleX(0);
-  }
-
-  to {
-    transform: scaleX(1);
-  }
-}
-
-
-@keyframes ringSpin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-@keyframes orbOne {
-  from {
-    transform: translate(-30px,-20px) scale(.9);
-  }
-
-  to {
-    transform: translate(100px,80px) scale(1.25);
-  }
-}
-
-
-@keyframes orbTwo {
-  from {
-    transform: translate(30px,30px) scale(1);
-  }
-
-  to {
-    transform: translate(-100px,-70px) scale(.8);
-  }
-}
-
-
-@keyframes orbThree {
-  from {
-    transform: translate(-60px,20px);
-  }
-
-  to {
-    transform: translate(80px,-80px);
-  }
-}
-
-
-@keyframes noiseMove {
-  0% {
-    transform: translate(0,0);
-  }
-
-  25% {
-    transform: translate(3%,-2%);
-  }
-
-  50% {
-    transform: translate(-2%,3%);
-  }
-
-  75% {
-    transform: translate(2%,2%);
-  }
-
-  100% {
-    transform: translate(-3%,-2%);
-  }
-}
-
-
-/* CURSOR */
-
-.cursor {
-  width: 14px;
-  height: 14px;
-  border: 1px solid white;
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 11000;
-  pointer-events: none;
-  transform: translate(-50%,-50%);
-  mix-blend-mode: difference;
-  transition:
-    width .35s ease,
-    height .35s ease,
-    background .35s ease;
-}
-
-
-.cursor span {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 8px;
-  opacity: 0;
-}
-
-
-.cursor.active {
-  width: 70px;
-  height: 70px;
-  background: white;
-  color: black;
-  mix-blend-mode: normal;
-}
-
-
-.cursor.active span {
-  opacity: 1;
-}
-
-
-/* SCROLL */
-
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--text);
-  z-index: 9998;
-}
-
-
-/* HEADER */
-
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 108px;
-  padding: 25px 42px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 500;
-  transition:
-    height .4s ease,
-    padding .4s ease,
-    background .4s ease,
-    color .4s ease;
-}
-
-
-.site-header.scrolled {
-  height: 78px;
-  padding: 17px 42px;
-  background: var(--header-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--soft-line);
-}
-
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-
-.portrait-frame {
-  width: 43px;
-  height: 43px;
-  border-radius: 13px;
-  overflow: hidden;
-  background: #171717;
-  border: 1px solid rgba(255,255,255,.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.portrait-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-
-.portrait-initials {
-  display: none;
-  font-size: 10px;
-}
-
-
-.portrait-fallback .portrait-initials {
-  display: block;
-}
-
-
-.brand-name,
-.main-nav a,
-.theme-toggle {
-  font-family: "Aquatico", Arial, sans-serif;
-}
-
-
-.brand-name {
-  font-size: 10px;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-}
-
-
-.main-nav {
-  display: flex;
-  gap: 42px;
-  margin-left: auto;
-  margin-right: 45px;
-}
-
-
-.main-nav a {
-  font-size: 9px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  position: relative;
-}
-
-
-.main-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 0;
-  height: 1px;
-  background: currentColor;
-  transition: width .3s ease;
-}
-
-
-.main-nav a:hover::after,
-.main-nav a.active::after {
-  width: 100%;
-}
-
-
-.theme-toggle {
-  width: 43px;
-  height: 43px;
-  border-radius: 50%;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  color: var(--text);
-  cursor: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition:
-    transform .3s ease,
-    background .4s ease,
-    border-color .4s ease;
-}
-
-
-.theme-toggle:hover {
-  transform: rotate(30deg);
-}
-
-
-/* HERO */
-
-.hero {
-  min-height: 100svh;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.hero-image {
-  position: absolute;
-  inset: -5%;
-  background: url("./hero.jpg?v=9") center / cover no-repeat;
-  filter: blur(5px);
-  transform: scale(1.07);
-}
-
-
-.hero-colour {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      circle at 25% 40%,
-      rgba(96,48,255,.23),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 80% 65%,
-      rgba(0,157,255,.15),
-      transparent 28%
-    );
-  mix-blend-mode: screen;
-}
-
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.65),
-      rgba(0,0,0,.12) 45%,
-      rgba(0,0,0,.7)
-    );
-}
-
-
-.hero-glass {
-  position: absolute;
-  top: 135px;
-  right: 42px;
-  z-index: 3;
-}
-
-
-.glass-pill {
-  padding: 13px 17px;
-  display: flex;
-  gap: 18px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.16);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  letter-spacing: .08em;
-}
-
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  width: min(1450px, calc(100% - 84px));
-  height: calc(100svh - 120px);
-  margin-top: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-
-.hero-title {
-  position: relative;
-  text-align: center;
-  line-height: .82;
-  color: white;
-}
-
-
-.hero-title span {
-  display: block;
-  font-family: "Rugis", Arial, sans-serif;
-  font-size: clamp(82px, 12.8vw, 150px);
-  letter-spacing: -.05em;
-  white-space: nowrap;
-}
-
-
-.outline-text {
-  position: absolute;
-  inset: 0;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,.95);
-}
-
-
-.solid-text {
-  opacity: 0;
-  transform: scale(1.04);
-  animation: heroSolid 1.5s cubic-bezier(.77,0,.175,1) .35s forwards;
-}
-
-
-@keyframes heroSolid {
-
-  0% {
-    opacity: 0;
-    transform: scale(1.04);
-  }
-
-  55% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-}
-
-
-.hero-bottom {
-  width: 100%;
-  margin-top: 75px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.hero-description {
-  max-width: 520px;
-  text-align: center;
-  font-family: "Quera", Arial, sans-serif;
-  font-size: clamp(17px, 1.45vw, 22px);
-  line-height: 1.3;
-  letter-spacing: .025em;
-}
-
-
-.scroll-link {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-
-.scroll-arrow {
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  transition: transform .3s ease;
-}
-
-
-.scroll-link:hover .scroll-arrow {
-  transform: translateY(5px);
-}
-
-
-.hero-corner {
-  position: absolute;
-  left: 42px;
-  bottom: 40px;
-  z-index: 3;
-  display: flex;
-  gap: 18px;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  letter-spacing: .08em;
-}
-
-
-/* SECTIONS */
-
-.intro-section,
-.work-section,
-.statement-section,
-.about-section,
-.contact-section {
-  padding: 150px 42px;
-  position: relative;
-  overflow: hidden;
-}
-
-
-.intro-section::before,
-.work-section::before,
-.statement-section::before,
-.about-section::before,
-.contact-section::before {
-  content: "";
-  position: absolute;
-  width: 720px;
-  height: 720px;
-  border-radius: 50%;
-  filter: blur(120px);
-  pointer-events: none;
-  z-index: -1;
-  opacity: .8;
-}
-
-
-.intro-section::before {
-  left: -280px;
-  top: -260px;
-  background: radial-gradient(
-    circle,
-    rgba(102, 60, 255, .16) 0%,
-    rgba(102, 60, 255, 0) 68%
-  );
-}
-
-
-.work-section::before {
-  right: -300px;
-  top: -180px;
-  background: radial-gradient(
-    circle,
-    rgba(22, 140, 255, .13) 0%,
-    rgba(22, 140, 255, 0) 68%
-  );
-}
-
-
-.statement-section::before {
-  left: -260px;
-  top: 20%;
-  background: radial-gradient(
-    circle,
-    rgba(190, 65, 255, .12) 0%,
-    rgba(190, 65, 255, 0) 68%
-  );
-}
-
-
-.about-section::before {
-  right: -300px;
-  top: 5%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 49, 91, .105) 0%,
-    rgba(255, 49, 91, 0) 68%
-  );
-}
-
-
-.contact-section::before {
-  left: 8%;
-  bottom: -430px;
-  background: radial-gradient(
-    circle,
-    rgba(80, 100, 255, .13) 0%,
-    rgba(80, 100, 255, 0) 68%
-  );
-}
-
-
-.section-label {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid var(--line);
-  padding-top: 14px;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--muted);
-}
-
-
-/* INTRO COPY */
-
-.intro-section {
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-
-.intro-copy {
-  max-width: 900px;
-  margin-left: auto;
-}
-
-
-.intro-copy p {
-  font-family: "Quera", Arial, sans-serif;
-  font-size: clamp(42px, 5vw, 80px);
-  line-height: 1.02;
-  letter-spacing: .018em;
-}
-
-
-/* WORK */
-
-.work-section {
-  padding-top: 80px;
-}
-
-
-.work-heading {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 30px;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--muted);
-}
-
-
-.projects {
-  border-top: 1px solid var(--line);
-}
-
-
-.project {
-  min-height: 145px;
-  display: grid;
-  grid-template-columns: 1fr 100px 40px;
-  align-items: center;
-  gap: 30px;
-  border-bottom: 1px solid var(--line);
-  position: relative;
-  transition: padding .5s ease;
-}
-
-
-.project-main {
-  position: relative;
-  z-index: 3;
-}
-
-
-.project-main h2 {
-  font-family: "Quera", Arial, sans-serif;
-  font-size: clamp(30px, 4vw, 62px);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: .012em;
-  transition: transform .45s ease;
-}
-
-
-.project-main p {
-  font-family: "Quera", Arial, sans-serif;
-  font-size: 12px;
-  letter-spacing: .03em;
-  color: var(--muted);
-  margin-top: 11px;
-}
-
-
-.project-year {
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  color: var(--muted);
-}
-
-
-.project-arrow {
-  font-size: 25px;
-  transition: transform .4s ease;
-}
-
-
-.project:hover {
-  padding-left: 18px;
-  padding-right: 18px;
-}
-
-
-.project:hover .project-main h2 {
-  transform: translateX(10px);
-}
-
-
-.project:hover .project-arrow {
-  transform: translate(5px,-5px);
-}
-
-
-.project-preview {
-  position: absolute;
-  width: 330px;
-  height: 220px;
-  right: 100px;
-  top: 50%;
-  transform: translateY(-50%) scale(.8) rotate(2deg);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-  border-radius: 24px;
-  background: rgba(255,255,255,.07);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  transition:
-    opacity .45s ease,
-    transform .45s ease;
-}
-
-
-.project-preview::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("./hero.jpg?v=9") center / cover;
-  opacity: .3;
-  filter: grayscale(1);
-}
-
-
-.project:hover .project-preview {
-  opacity: 1;
-  transform: translateY(-50%) scale(1) rotate(0);
-}
-
-
-.preview-inner {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 22px;
-}
-
-
-.preview-inner span {
-  font-family: "Rugis", Arial, sans-serif;
-  font-size: 45px;
-}
-
-
-.preview-inner small {
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-}
-
-
-/* STATEMENT */
-
-.statement-section {
-  padding-top: 190px;
-}
-
-
-.statement {
-  max-width: 1000px;
-  margin: 160px 0 170px auto;
-}
-
-
-.statement p {
-  font-family: "Quera", Arial, sans-serif;
-  font-size: clamp(55px, 7vw, 115px);
-  line-height: .94;
-  letter-spacing: .015em;
-}
-
-
-/* SERVICES */
-
-.services {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 14px;
-}
-
-
-.service-card {
-  min-height: 350px;
-  position: relative;
-  overflow: hidden;
-  padding: 30px;
-  border-radius: 28px;
-  border: 1px solid var(--glass-border);
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.095),
-      rgba(255,255,255,.025)
-    );
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  transition:
-    transform .5s cubic-bezier(.2,.8,.2,1),
-    background .5s ease,
-    border-color .5s ease;
-}
-
-
-body.light .service-card {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.62),
-      rgba(255,255,255,.3)
-    );
-}
-
-
-.service-card:hover {
-  transform: translateY(-10px) scale(1.012);
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.15),
-      rgba(255,255,255,.045)
-    );
-  border-color: rgba(255,255,255,.3);
-}
-
-
-.service-number {
-  position: absolute;
-  top: 25px;
-  right: 28px;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  color: var(--muted);
-}
-
-
-.service-glow {
-  position: absolute;
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  background: rgba(95,50,255,.3);
-  filter: blur(65px);
-  right: -100px;
-  bottom: -100px;
-  opacity: 0;
-  transition: opacity .5s ease;
-}
-
-
-.service-card:nth-child(2) .service-glow {
-  background: rgba(255,60,110,.28);
-}
-
-
-.service-card:nth-child(3) .service-glow {
-  background: rgba(0,160,255,.28);
-}
-
-
-.service-card:nth-child(4) .service-glow {
-  background: rgba(130,255,180,.2);
-}
-
-
-.service-card:hover .service-glow {
-  opacity: 1;
-}
-
-
-.service-content {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-
-.service-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 25px;
-  transition:
-    transform .5s ease,
-    opacity .5s ease;
-}
-
-
-.service-card:hover .service-icon {
-  transform: rotate(90deg) scale(1.25);
-}
-
-
-.service-content h3 {
-  font-family: "Quera", Arial, sans-serif;
-  font-size: clamp(35px, 4vw, 62px);
-  font-weight: 400;
-  line-height: .95;
-  letter-spacing: .015em;
-  transition: transform .5s ease;
-}
-
-
-.service-card:hover .service-content h3 {
-  transform: translateY(-8px);
-}
-
-
-.service-content p {
-  max-width: 360px;
-  margin-top: 18px;
-  font-family: "Quera", Arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.45;
-  letter-spacing: .025em;
-  color: var(--muted);
-  opacity: .55;
-  transform: translateY(10px);
-  transition:
-    opacity .5s ease,
-    transform .5s ease;
-}
-
-
-.service-card:hover .service-content p {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-.service-arrow {
-  position: absolute;
-  right: 28px;
-  bottom: 27px;
-  font-size: 24px;
-  transition: transform .4s ease;
-}
-
-
-.service-card:hover .service-arrow {
-  transform: translate(5px,-5px);
-}
-
-
-/* ABOUT */
-
-.about-section {
-  min-height: 100vh;
-}
-
-
-.about-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  margin-top: 160px;
-}
-
-
-.about-title h2 {
-  font-family: "Quera", Arial, sans-serif;
-  font-size: clamp(52px, 7vw, 110px);
-  line-height: .93;
-  letter-spacing: .01em;
-  font-weight: 400;
-}
-
-
-.about-copy {
-  max-width: 520px;
-}
-
-
-.about-copy p {
-  font-family: "Quera", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.55;
-  letter-spacing: .025em;
-  color: var(--muted);
-  margin-bottom: 35px;
-}
-
-
-.about-copy .large-copy {
-  color: var(--text);
-  font-size: clamp(25px, 2.5vw, 38px);
-  line-height: 1.12;
-  letter-spacing: .015em;
-}
-
-
-/* ABOUT PHOTO CARD */
-
-.about-photo-card {
-  position: relative !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-
-  width: 170px;
-  height: 220px;
-
-  margin-top: 42px;
-  margin-left: 0;
-
-  overflow: hidden;
-
-  border-radius: 28px;
-
-  border: 1px solid rgba(255,255,255,.2);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.13),
-      rgba(255,255,255,.035)
-    );
-
-  box-shadow:
-    0 30px 70px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.15);
-
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-
-  opacity: 0;
-
-  transform: translateX(90px) !important;
-
-  transition:
-    opacity .9s ease,
-    transform 1s cubic-bezier(.2,.8,.2,1);
-
-  z-index: 2;
-}
-
-
-.about-photo-card.visible {
-  opacity: 1;
-
-  transform: translateX(0) !important;
-}
-
-
-.about-photo-card img {
-  position: absolute;
-  left: 0;
-  top: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  object-position: center top;
-
-  z-index: 3;
-}
-
-
-.about-photo-card::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.08),
-      transparent 35%,
-      rgba(0,0,0,.18)
-    );
-
-  z-index: 4;
-
-  pointer-events: none;
-}
-
-
-.about-photo-card::after {
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: inherit;
-
-  border: 1px solid rgba(255,255,255,.08);
-
-  z-index: 5;
-
-  pointer-events: none;
-}
-
-
-.about-photo-glow {
-  position: absolute;
-
-  width: 130px;
-  height: 130px;
-
-  right: -50px;
-  bottom: -45px;
-
-  border-radius: 50%;
-
-  background: rgba(105,70,255,.35);
-
-  filter: blur(45px);
-
-  z-index: 1;
-}
-
-
-.about-photo-shape {
-  position: absolute;
-
-  border-radius: 50%;
-
-  background: rgba(255,255,255,.25);
-
-  filter: blur(1px);
-
-  z-index: 2;
-
-  pointer-events: none;
-}
-
-
-.about-photo-shape.shape-one {
-  width: 95px;
-  height: 30px;
-
-  top: 20px;
-  left: -25px;
-
-  transform: rotate(-45deg);
-
-  background: rgba(255,255,255,.35);
-}
-
-
-.about-photo-shape.shape-two {
-  width: 85px;
-  height: 28px;
-
-  top: 80px;
-  right: -30px;
-
-  transform: rotate(-45deg);
-
-  background: rgba(255,255,255,.27);
-}
-
-
-.about-photo-shape.shape-three {
-  width: 110px;
-  height: 30px;
-
-  bottom: 25px;
-  left: -25px;
-
-  transform: rotate(-55deg);
-
-  background: rgba(255,255,255,.25);
-}
-
-
-/* CONTACT */
-
-.contact-section {
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-}
-
-
-.contact-content {
-  margin-top: auto;
-}
-
-
-.contact-content > p {
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 25px;
-}
-
-
-.contact-email {
-  font-family: "Rugis", Arial, sans-serif;
-  font-size: clamp(60px, 10vw, 160px);
-  line-height: .8;
-  letter-spacing: -.05em;
-  display: inline-block;
-}
-
-
-.contact-meta {
-  display: flex;
-  gap: 35px;
-  margin-top: 100px;
-}
-
-
-.contact-meta a {
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-}
-
-
-/* FOOTER */
-
-.site-footer {
-  padding: 25px 42px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  font-family: "Aquatico", Arial, sans-serif;
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--muted);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta
+    name="description"
+    content="Ayomide Adegboro is a visual designer working across brand identity, creative direction and visual communication."
+  >
 
-/* REVEAL */
+  <title>Ayomide Adegboro | Visual Designer</title>
 
-.reveal {
-  opacity: 0;
-  transform: translateY(45px);
-  transition:
-    opacity .9s ease,
-    transform .9s cubic-bezier(.2,.8,.2,1);
-}
+  <link rel="preload" href="Rugis.ttf?v=9" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="Aquatico-Regular.otf?v=3" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="Quera.otf?v=2" as="font" type="font/otf" crossorigin>
 
+  <link rel="stylesheet" href="style.css?v=9">
+</head>
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+<body class="intro-active">
 
+  <!-- INTRO -->
 
-/* MOBILE */
+  <div class="intro" id="intro">
 
-@media (max-width: 800px) {
+    <div class="intro-noise"></div>
 
-  body {
-    cursor: auto;
-  }
+    <div class="intro-orb orb-one"></div>
+    <div class="intro-orb orb-two"></div>
+    <div class="intro-orb orb-three"></div>
 
+    <div class="intro-top">
+      <span>AYOMIDE ADEGBORO</span>
+      <span>VISUAL DESIGNER</span>
+    </div>
 
-  .cursor {
-    display: none;
-  }
+    <div class="intro-stage">
 
+      <div class="intro-kicker">
+        <span>DESIGN / DIRECTION / COMMUNICATION</span>
+      </div>
 
-  .intro {
-    padding: 24px 20px;
-  }
+      <div class="intro-statement statement-one">
+        <span>Ideas</span>
+      </div>
 
+      <div class="intro-statement statement-two">
+        <span>become</span>
+      </div>
 
-  .intro-stage {
-    height: 62vh;
-  }
+      <div class="intro-statement statement-three">
+        <span>visual.</span>
+      </div>
 
+      <div class="intro-ring"></div>
 
-  .intro-statement {
-    font-size: 24vw;
-  }
+      <div class="intro-glass">
+        <span>PORTFOLIO</span>
+        <span>2026</span>
+      </div>
 
+    </div>
 
-  .intro-kicker {
-    font-size: 6px;
-  }
+    <div class="intro-bottom">
 
+      <div class="intro-location">
+        LAGOS, NIGERIA
+      </div>
 
-  .intro-glass {
-    right: auto;
-    left: 0;
-    bottom: 0;
-    border-radius: 14px;
-  }
+      <button class="intro-enter" id="enterPortfolio">
+        <span>Enter</span>
+        <span>↗</span>
+      </button>
 
+      <button class="intro-skip" id="skipIntro">
+        Skip intro
+      </button>
 
-  .intro-bottom {
-    grid-template-columns: 1fr auto;
-    gap: 20px;
-  }
+    </div>
 
+    <div class="intro-progress"></div>
 
-  .intro-skip {
-    grid-column: 2;
-  }
+  </div>
 
 
-  .intro-location {
-    display: none;
-  }
+  <!-- CURSOR -->
 
+  <div class="cursor">
+    <span>VIEW</span>
+  </div>
 
-  .intro-progress {
-    left: 20px;
-    right: 20px;
-    bottom: 90px;
-  }
 
+  <!-- SCROLL PROGRESS -->
 
-  .site-header {
-    height: 82px;
-    padding: 18px 20px;
-  }
+  <div class="scroll-progress"></div>
 
 
-  .site-header.scrolled {
-    height: 70px;
-    padding: 14px 20px;
-  }
+  <!-- HEADER -->
 
+  <header class="site-header">
 
-  .brand-name {
-    font-size: 8px;
-  }
+    <a href="#top" class="brand">
 
+      <span class="portrait-frame">
 
-  .portrait-frame {
-    width: 38px;
-    height: 38px;
-  }
+        <img
+          src="portrait.png?v=9"
+          alt="Ayomide Adegboro"
+          onerror="this.style.display='none'; this.parentElement.classList.add('portrait-fallback');"
+        >
 
+        <span class="portrait-initials">AA</span>
 
-  .main-nav {
-    gap: 16px;
-    margin-right: 16px;
-  }
+      </span>
 
+      <span class="brand-name">
+        Ayomide Adegboro
+      </span>
 
-  .main-nav a {
-    font-size: 7px;
-  }
+    </a>
 
 
-  .theme-toggle {
-    width: 38px;
-    height: 38px;
-  }
+    <nav class="main-nav">
 
+      <a href="#work" data-section="work">
+        Work
+      </a>
 
-  .hero-content {
-    width: calc(100% - 40px);
-    height: calc(100svh - 100px);
-  }
+      <a href="#about" data-section="about">
+        About
+      </a>
 
+      <a href="#contact" data-section="contact">
+        Connect
+      </a>
 
-  .hero-title span {
-    font-size: 18vw;
-    white-space: normal;
-  }
+    </nav>
 
 
-  .hero-bottom {
-    margin-top: 60px;
-  }
+    <button
+      class="theme-toggle"
+      aria-label="Toggle colour mode"
+      type="button"
+    >
+      <span class="theme-icon">◌</span>
+    </button>
 
+  </header>
 
-  .hero-description {
-    max-width: 340px;
-    font-size: 17px;
-    letter-spacing: .025em;
-  }
 
+  <main id="top">
 
-  .scroll-link {
-    right: auto;
-    left: 0;
-    bottom: -70px;
-  }
 
+    <!-- HERO -->
 
-  .hero-glass {
-    top: 105px;
-    right: 20px;
-    border-radius: 999px;
-  }
+    <section class="hero">
 
+      <div class="hero-image"></div>
 
-  .hero-corner {
-    left: 20px;
-    bottom: 25px;
-  }
+      <div class="hero-colour"></div>
 
+      <div class="hero-overlay"></div>
 
-  .intro-section,
-  .work-section,
-  .statement-section,
-  .about-section,
-  .contact-section {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-  }
+      <div class="hero-glass glass-pill">
+        <span>VISUAL DESIGNER</span>
+        <span>NIGERIA</span>
+      </div>
 
 
-  .intro-section {
-    min-height: 70vh;
-  }
+      <div class="hero-content">
 
+        <div class="hero-title">
 
-  .intro-copy {
-    margin-top: 100px;
-  }
+          <span class="outline-text">
+            Hi, I'm Artivator
+          </span>
 
+          <span class="solid-text">
+            Hi, I'm Artivator
+          </span>
 
-  .intro-copy p {
-    font-size: 42px;
-    letter-spacing: .018em;
-  }
+        </div>
 
 
-  .project {
-    min-height: 125px;
-    grid-template-columns: 1fr 30px;
-    gap: 10px;
-  }
+        <div class="hero-bottom">
 
+          <p class="hero-description">
+            I design brands, their experiences and the visual worlds they inhabit.
+          </p>
 
-  .project-year {
-    display: none;
-  }
+          <a href="#work" class="scroll-link">
 
+            <span>
+              Scroll to explore
+            </span>
 
-  .project-main h2 {
-    font-size: 30px;
-  }
+            <span class="scroll-arrow">
+              ↓
+            </span>
 
+          </a>
 
-  .project-main p {
-    font-size: 10px;
-    letter-spacing: .025em;
-  }
+        </div>
 
+      </div>
 
-  .project-preview {
-    display: none;
-  }
 
+      <div class="hero-corner">
+        <span>SELECTED WORK</span>
+        <span>2023-2026</span>
+      </div>
 
-  .project:hover {
-    padding-left: 0;
-    padding-right: 0;
-  }
+    </section>
 
 
-  .statement {
-    margin: 100px 0;
-  }
+    <!-- INTRODUCTION -->
 
+    <section class="intro-section">
 
-  .statement p {
-    font-size: 55px;
-  }
+      <div class="section-label">
 
+        <span>
+          Selected work
+        </span>
 
-  .services {
-    grid-template-columns: 1fr;
-  }
+        <span>
+          2023-2026
+        </span>
 
+      </div>
 
-  .service-card {
-    min-height: 310px;
-    border-radius: 22px;
-  }
 
+      <div class="intro-copy reveal">
 
-  .service-content p {
-    opacity: 1;
-    transform: none;
-  }
+        <p>
+          I work across identity, campaigns, digital experiences and visual systems,
+          helping ideas become clear, distinctive and memorable.
+        </p>
 
+      </div>
 
-  .about-layout {
-    grid-template-columns: 1fr;
-    gap: 80px;
-    margin-top: 100px;
-  }
+    </section>
 
 
-  .about-title h2 {
-    font-size: 65px;
-  }
+    <!-- WORK -->
 
+    <section class="work-section" id="work">
 
-  .about-photo-card {
-    width: 150px;
-    height: 195px;
-    margin-top: 35px;
-    border-radius: 23px;
-    transform: translateX(60px) !important;
-  }
+      <div class="work-heading reveal">
 
+        <span>
+          Selected work
+        </span>
 
-  .about-photo-card.visible {
-    transform: translateX(0) !important;
-  }
+        <span>
+          A collection of things I have made
+        </span>
 
+      </div>
 
-  .contact-email {
-    font-size: 19vw;
-  }
 
+      <div class="projects">
 
-  .contact-meta {
-    margin-top: 70px;
-    gap: 22px;
-  }
 
+        <a href="#" class="project reveal" data-project="scooler">
 
-  .site-footer {
-    padding: 20px;
-    flex-direction: column;
-    gap: 10px;
-  }
+          <div class="project-main">
+            <h2>Scooler AI</h2>
 
-}
+            <p>
+              Agentic AI · Brand Identity · Digital Marketing
+            </p>
+          </div>
 
+          <div class="project-year">
+            2026
+          </div>
 
-@media (prefers-reduced-motion: reduce) {
+          <div class="project-arrow">
+            ↗
+          </div>
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
-  }
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Scooler</span>
+              <small>AI · Education</small>
+            </div>
+          </div>
 
-}
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="hexa">
+
+          <div class="project-main">
+            <h2>Hexa</h2>
+
+            <p>
+              Brand identity · Visual communication
+            </p>
+          </div>
+
+          <div class="project-year">
+            2026
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Hexa</span>
+              <small>Identity system</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="funtimes">
+
+          <div class="project-main">
+            <h2>FunTimes Magazine</h2>
+
+            <p>
+              Editorial · Visuals · Publication
+            </p>
+          </div>
+
+          <div class="project-year">
+            2025/2026
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>FunTimes</span>
+              <small>Editorial</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="ibquake">
+
+          <div class="project-main">
+            <h2>Ibquake</h2>
+
+            <p>
+              Celebrity · Campaign · Brand Identity
+            </p>
+          </div>
+
+          <div class="project-year">
+            2025
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Ibquake</span>
+              <small>Campaign</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="allegra">
+
+          <div class="project-main">
+            <h2>Allegra</h2>
+
+            <p>
+              Real Estate · Visual Identity · Strategy
+            </p>
+          </div>
+
+          <div class="project-year">
+            2025/2026
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Allegra</span>
+              <small>REAL ESTATE</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="modion">
+
+          <div class="project-main">
+            <h2>Creato Urban</h2>
+
+            <p>
+              Formerly Modion Communications · Campaigns · Branding
+            </p>
+          </div>
+
+          <div class="project-year">
+            2025
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Creato</span>
+              <small>Urban (Formerly Modion Communications)</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="weddn">
+
+          <div class="project-main">
+            <h2>Weddn</h2>
+
+            <p>
+              Visual identity · Wedding Product · Social
+            </p>
+          </div>
+
+          <div class="project-year">
+            2024-2026
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Weddn</span>
+              <small>Digital wedding experience</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="isp">
+
+          <div class="project-main">
+            <h2>ISP Education</h2>
+
+            <p>
+              Brand communication · Education · Visual
+            </p>
+          </div>
+
+          <div class="project-year">
+            2025-2026
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>ISP</span>
+              <small>Education</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="cyclone">
+
+          <div class="project-main">
+            <h2>Cyclone Mag</h2>
+
+            <p>
+              Editorial identity · Digital · Art direction
+            </p>
+          </div>
+
+          <div class="project-year">
+            2025-2026
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Cyclone</span>
+              <small>Media House</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="opulence">
+
+          <div class="project-main">
+            <h2>Opulence</h2>
+
+            <p>
+              Luxury · Identity · Visual direction
+            </p>
+          </div>
+
+          <div class="project-year">
+            2024
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Opulence</span>
+              <small>Luxury</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="tax">
+
+          <div class="project-main">
+            <h2>National Tax Debate</h2>
+
+            <p>
+              Conference · Brochure Design · Identity
+            </p>
+          </div>
+
+          <div class="project-year">
+            2024
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>TTC NTD</span>
+              <small>National Tax Debate</small>
+            </div>
+          </div>
+
+        </a>
+
+
+        <a href="#" class="project reveal" data-project="mcsa">
+
+          <div class="project-main">
+            <h2>Freelance</h2>
+
+            <p>
+              Different Clients, Same Quality Standard
+            </p>
+          </div>
+
+          <div class="project-year">
+            2023-2026
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+          <div class="project-preview">
+            <div class="preview-inner">
+              <span>Freelance</span>
+              <small>Consultation</small>
+            </div>
+          </div>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section class="statement-section">
+
+      <div class="section-label">
+
+        <span>
+          What I do
+        </span>
+
+        <span>
+          Strategy / Design / Direction
+        </span>
+
+      </div>
+
+
+      <div class="statement reveal">
+
+        <p>
+          Strategy gives your idea direction. My design gives it a voice.
+        </p>
+
+      </div>
+
+
+      <div class="services">
+
+
+        <div class="service-card reveal">
+
+          <div class="service-number">
+            01
+          </div>
+
+          <div class="service-glow"></div>
+
+          <div class="service-content">
+
+            <span class="service-icon">✳</span>
+
+            <h3>
+              Brand identity
+            </h3>
+
+            <p>
+              Visual identities that give brands a distinctive presence,
+              personality and system.
+            </p>
+
+          </div>
+
+          <div class="service-arrow">
+            ↗
+          </div>
+
+        </div>
+
+
+        <div class="service-card reveal">
+
+          <div class="service-number">
+            02
+          </div>
+
+          <div class="service-glow"></div>
+
+          <div class="service-content">
+
+            <span class="service-icon">✦</span>
+
+            <h3>
+              Creative direction
+            </h3>
+
+            <p>
+              Ideas, systems and visual worlds built around a clear
+              creative point of view.
+            </p>
+
+          </div>
+
+          <div class="service-arrow">
+            ↗
+          </div>
+
+        </div>
+
+
+        <div class="service-card reveal">
+
+          <div class="service-number">
+            03
+          </div>
+
+          <div class="service-glow"></div>
+
+          <div class="service-content">
+
+            <span class="service-icon">◌</span>
+
+            <h3>
+              Visual communication
+            </h3>
+
+            <p>
+              Design that makes information, campaigns and ideas
+              easier to understand.
+            </p>
+
+          </div>
+
+          <div class="service-arrow">
+            ↗
+          </div>
+
+        </div>
+
+
+        <div class="service-card reveal">
+
+          <div class="service-number">
+            04
+          </div>
+
+          <div class="service-glow"></div>
+
+          <div class="service-content">
+
+            <span class="service-icon">↗</span>
+
+            <h3>
+              Digital design
+            </h3>
+
+            <p>
+              Digital experiences that feel considered, useful and
+              unmistakably theirs.
+            </p>
+
+          </div>
+
+          <div class="service-arrow">
+            ↗
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="about-section" id="about">
+
+      <div class="section-label">
+
+        <span>
+          About
+        </span>
+
+        <span>
+          The person behind the frames
+        </span>
+
+      </div>
+
+
+      <div class="about-layout">
+
+
+        <div class="about-title reveal">
+
+          <h2>
+            Designer.<br>
+            Creative thinker.<br>
+            Builder.
+          </h2>
+
+        </div>
+
+
+        <div class="about-copy reveal">
+
+          <p class="large-copy">
+            I'm Ayomide Adegboro, a visual designer interested in the space
+            between strategy, ideation and design.
+          </p>
+
+          <p>
+            I help brands stand distinct in the noise through minimal, stylish
+            visual direction. My work moves between brand identity, creative
+            direction, digital design and visual communication, turning complex
+            ideas into clear, memorable visual experiences.
+          </p>
+
+          <p>
+            Working across multiple brands, people and ideas. Let's get to work.
+          </p>
+
+
+          <!-- PROFILE CARD -->
+
+          <div class="about-photo-card">
+
+            <div class="about-photo-glow"></div>
+
+            <div class="about-photo-shape shape-one"></div>
+            <div class="about-photo-shape shape-two"></div>
+            <div class="about-photo-shape shape-three"></div>
+
+            <img
+              src="portrait.png?v=9"
+              alt="Ayomide Adegboro"
+            >
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="contact-section" id="contact">
+
+      <div class="section-label">
+
+        <span>
+          Contact
+        </span>
+
+        <span>
+          Let's make something
+        </span>
+
+      </div>
+
+
+      <div class="contact-content reveal">
+
+        <p>
+          Have an idea?
+        </p>
+
+        <a
+          href="mailto:hello@ayomideadegboro.com"
+          class="contact-email"
+        >
+          Let's make it real.
+        </a>
+
+
+        <div class="contact-meta">
+
+          <a href="mailto:ayomideadegboro116@gmail.com">
+            EMAIL
+          </a>
+
+          <a
+            href="https://www.instagram.com/artivator_/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            INSTAGRAM
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/ayomide-adegboro-35426b227/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LINKEDIN
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer class="site-footer">
+
+    <span>
+      © 2026 Artivator
+    </span>
+
+    <span>
+      Designed & built by ARTIVATOR
+    </span>
+
+    <a href="#top">
+      Back to top ↑
+    </a>
+
+  </footer>
+
+
+  <script src="script.js?v=9"></script>
+
+</body>
+</html>
