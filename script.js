@@ -1,532 +1,467 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================
+   INTRO
+========================= */
 
-  const body = document.body;
+const intro = document.getElementById("intro");
+const introEnter = document.getElementById("introEnter");
+const introSkip = document.getElementById("introSkip");
 
-  const intro = document.querySelector("#intro");
-  const enterPortfolio = document.querySelector("#enterPortfolio");
-  const skipIntro = document.querySelector("#skipIntro");
+const INTRO_KEY = "portfolio-intro-seen-v3";
 
-  const cursor = document.querySelector(".cursor");
-  const progress = document.querySelector(".scroll-progress");
-  const header = document.querySelector(".site-header");
+function closeIntro() {
+  if (!intro) return;
 
-  const themeToggle = document.querySelector(".theme-toggle");
-  const themeIcon = document.querySelector(".theme-icon");
+  intro.classList.add("hidden");
+  sessionStorage.setItem(INTRO_KEY, "true");
 
-  const revealElements = document.querySelectorAll(".reveal");
-  const navLinks = document.querySelectorAll(".main-nav a");
-
-  const services = document.querySelectorAll(".service-card");
-
-
-  /* INTRO */
-
-  const introSeen =
-    sessionStorage.getItem("portfolio-intro-seen");
+  setTimeout(() => {
+    intro.style.display = "none";
+  }, 950);
+}
 
 
-  function closeIntro() {
+if (sessionStorage.getItem(INTRO_KEY)) {
+  intro.classList.add("hidden");
 
-    if (!intro) {
+  setTimeout(() => {
+    intro.style.display = "none";
+  }, 50);
+}
+
+
+if (introEnter) {
+  introEnter.addEventListener("click", closeIntro);
+}
+
+
+if (introSkip) {
+  introSkip.addEventListener("click", closeIntro);
+}
+
+
+/* =========================
+   THEME
+========================= */
+
+const themeToggle = document.getElementById("themeToggle");
+
+const THEME_KEY = "portfolio-theme-v2";
+
+function applyTheme(theme) {
+  if (theme === "light") {
+    document.body.classList.add("light");
+
+    if (themeToggle) {
+      themeToggle.textContent = "◑";
+    }
+  } else {
+    document.body.classList.remove("light");
+
+    if (themeToggle) {
+      themeToggle.textContent = "◐";
+    }
+  }
+}
+
+
+/*
+  Dark is the default.
+
+  The new storage key intentionally ignores
+  the old theme preference so the website
+  opens dark for existing visitors too.
+*/
+
+const savedTheme = localStorage.getItem(THEME_KEY);
+
+applyTheme(savedTheme === "light" ? "light" : "dark");
+
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+
+    const isLight = document.body.classList.contains("light");
+
+    const nextTheme = isLight ? "dark" : "light";
+
+    applyTheme(nextTheme);
+
+    localStorage.setItem(THEME_KEY, nextTheme);
+  });
+}
+
+
+/* =========================
+   CUSTOM CURSOR
+========================= */
+
+const cursor = document.getElementById("cursor");
+
+if (cursor && window.matchMedia("(pointer: fine)").matches) {
+
+  window.addEventListener("mousemove", (event) => {
+    cursor.style.left = `${event.clientX}px`;
+    cursor.style.top = `${event.clientY}px`;
+  });
+
+
+  const interactiveElements = document.querySelectorAll(
+    "a, button, .project, .service-card"
+  );
+
+
+  interactiveElements.forEach((element) => {
+
+    element.addEventListener("mouseenter", () => {
+      cursor.classList.add("active");
+    });
+
+    element.addEventListener("mouseleave", () => {
+      cursor.classList.remove("active");
+    });
+
+  });
+}
+
+
+/* =========================
+   TYPEWRITER
+========================= */
+
+const typewriterText = document.getElementById("typewriterText");
+
+const phrases = [
+  "I design",
+  "I create",
+  "I'm Artivator"
+];
+
+let phraseIndex = 0;
+let characterIndex = 0;
+let deleting = false;
+
+
+function typeWriter() {
+
+  if (!typewriterText) return;
+
+  const currentPhrase = phrases[phraseIndex];
+
+  if (!deleting) {
+
+    typewriterText.textContent =
+      currentPhrase.slice(0, characterIndex + 1);
+
+    characterIndex++;
+
+    if (characterIndex === currentPhrase.length) {
+
+      deleting = true;
+
+      setTimeout(typeWriter, 1300);
       return;
     }
 
-    intro.classList.add("exit");
-
-    body.classList.remove("intro-active");
-
-    sessionStorage.setItem(
-      "portfolio-intro-seen",
-      "true"
-    );
-
-    setTimeout(() => {
-
-      intro.style.display = "none";
-
-    }, 1300);
-
-  }
-
-
-  if (introSeen === "true") {
-
-    intro.style.display = "none";
-
-    body.classList.remove("intro-active");
+    setTimeout(typeWriter, 85);
 
   } else {
 
-    setTimeout(() => {
+    typewriterText.textContent =
+      currentPhrase.slice(0, characterIndex - 1);
 
-      closeIntro();
+    characterIndex--;
 
-    }, 6500);
+    if (characterIndex === 0) {
 
+      deleting = false;
+
+      phraseIndex++;
+
+      if (phraseIndex >= phrases.length) {
+        phraseIndex = 0;
+      }
+
+      setTimeout(typeWriter, 400);
+      return;
+    }
+
+    setTimeout(typeWriter, 48);
   }
+}
 
 
-  enterPortfolio?.addEventListener(
-    "click",
-    closeIntro
-  );
+setTimeout(typeWriter, 900);
 
 
-  skipIntro?.addEventListener(
-    "click",
-    closeIntro
-  );
+/* =========================
+   CONTACT EMAIL INTERACTION
+========================= */
+
+const contactEmail = document.getElementById("contactEmail");
+
+if (
+  contactEmail &&
+  window.matchMedia("(pointer: fine)").matches
+) {
+
+  contactEmail.addEventListener("mousemove", (event) => {
+
+    const rect = contactEmail.getBoundingClientRect();
+
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const percentX = (x / rect.width) * 100;
+    const percentY = (y / rect.height) * 100;
+
+    const moveX =
+      ((x / rect.width) - 0.5) * 14;
+
+    const moveY =
+      ((y / rect.height) - 0.5) * 8;
+
+    contactEmail.style.setProperty(
+      "--mx",
+      `${percentX}%`
+    );
+
+    contactEmail.style.setProperty(
+      "--my",
+      `${percentY}%`
+    );
+
+    contactEmail.style.transform =
+      `translate(${moveX}px, ${moveY}px)`;
+  });
 
 
-  /* THEME */
+  contactEmail.addEventListener("mouseleave", () => {
 
-  const savedTheme =
-    localStorage.getItem("portfolio-theme");
+    contactEmail.style.transform =
+      "translate(0, 0)";
+
+    contactEmail.style.setProperty(
+      "--mx",
+      "50%"
+    );
+
+    contactEmail.style.setProperty(
+      "--my",
+      "50%"
+    );
+  });
+}
 
 
-  if (savedTheme === "light") {
+/* =========================
+   SERVICE CARD TILT
+========================= */
 
-    body.classList.add("light");
+const serviceCards =
+  document.querySelectorAll(".service-card");
 
-  }
+
+if (window.matchMedia("(pointer: fine)").matches) {
+
+  serviceCards.forEach((card) => {
+
+    card.addEventListener("mousemove", (event) => {
+
+      const rect = card.getBoundingClientRect();
+
+      const x =
+        event.clientX - rect.left;
+
+      const y =
+        event.clientY - rect.top;
+
+      const rotateY =
+        ((x / rect.width) - 0.5) * 4;
+
+      const rotateX =
+        ((y / rect.height) - 0.5) * -4;
+
+      card.style.transform =
+        `perspective(900px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)
+         translateY(-4px)`;
+    });
 
 
-  function updateThemeIcon() {
+    card.addEventListener("mouseleave", () => {
 
-    if (body.classList.contains("light")) {
+      card.style.transform =
+        "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)";
+    });
 
-      themeIcon.textContent = "◐";
+  });
+}
 
-      themeToggle.setAttribute(
-        "aria-label",
-        "Switch to dark mode"
-      );
 
+/* =========================
+   PROJECT HOVER
+========================= */
+
+const projects =
+  document.querySelectorAll(".project");
+
+
+projects.forEach((project) => {
+
+  project.addEventListener("mouseenter", () => {
+    project.classList.add("is-hovered");
+  });
+
+  project.addEventListener("mouseleave", () => {
+    project.classList.remove("is-hovered");
+  });
+
+});
+
+
+/* =========================
+   HEADER SCROLL
+========================= */
+
+const header =
+  document.querySelector(".site-header");
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!header) return;
+
+    if (window.scrollY > 40) {
+      header.classList.add("scrolled");
     } else {
-
-      themeIcon.textContent = "◌";
-
-      themeToggle.setAttribute(
-        "aria-label",
-        "Switch to light mode"
-      );
-
+      header.classList.remove("scrolled");
     }
 
-  }
+  },
+  { passive: true }
+);
 
 
-  updateThemeIcon();
+/* =========================
+   SMOOTH NAVIGATION
+========================= */
+
+const navLinks =
+  document.querySelectorAll(
+    '.nav a[href^="#"], .hero-link[href^="#"], .logo[href^="#"]'
+  );
 
 
-  themeToggle?.addEventListener(
-    "click",
-    () => {
+navLinks.forEach((link) => {
 
-      body.classList.toggle("light");
+  link.addEventListener("click", (event) => {
 
-      const currentTheme =
-        body.classList.contains("light")
-          ? "light"
-          : "dark";
+    const targetId =
+      link.getAttribute("href");
+
+    if (!targetId || targetId === "#") return;
+
+    const target =
+      document.querySelector(targetId);
+
+    if (!target) return;
+
+    event.preventDefault();
+
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  });
+
+});
 
 
-      localStorage.setItem(
-        "portfolio-theme",
-        currentTheme
-      );
+/* =========================
+   REVEAL ON SCROLL
+========================= */
+
+const revealElements =
+  document.querySelectorAll(
+    ".section-heading, .project, .service-card, .about-copy, .contact-inner"
+  );
 
 
-      updateThemeIcon();
+const revealObserver =
+  new IntersectionObserver(
+    (entries, observer) => {
 
+      entries.forEach((entry) => {
+
+        if (!entry.isIntersecting) return;
+
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+
+        observer.unobserve(entry.target);
+      });
+
+    },
+    {
+      threshold: 0.08
     }
   );
 
 
-  /* CURSOR */
+revealElements.forEach((element) => {
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
+  element.style.opacity = "0";
+  element.style.transform = "translateY(30px)";
+  element.style.transition =
+    "opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)";
 
-  let cursorX = mouseX;
-  let cursorY = mouseY;
+  revealObserver.observe(element);
+});
 
+
+/* =========================
+   HERO PARALLAX
+========================= */
+
+const heroImage =
+  document.querySelector(".hero-background img");
+
+
+if (
+  heroImage &&
+  window.matchMedia("(pointer: fine)").matches
+) {
 
   window.addEventListener(
     "mousemove",
-    event => {
+    (event) => {
 
-      mouseX = event.clientX;
-      mouseY = event.clientY;
+      const x =
+        (event.clientX / window.innerWidth - 0.5);
 
+      const y =
+        (event.clientY / window.innerHeight - 0.5);
+
+      heroImage.style.transform =
+        `scale(1.04)
+         translate(${x * -10}px, ${y * -10}px)`;
     }
   );
+}
 
 
-  function animateCursor() {
+/* =========================
+   IMAGE LOADING
+========================= */
 
-    cursorX +=
-      (mouseX - cursorX) * .16;
+document.querySelectorAll("img").forEach((image) => {
 
-    cursorY +=
-      (mouseY - cursorY) * .16;
-
-
-    cursor.style.left =
-      `${cursorX}px`;
-
-    cursor.style.top =
-      `${cursorY}px`;
-
-
-    requestAnimationFrame(
-      animateCursor
-    );
-
-  }
-
-
-  animateCursor();
-
-
-  document
-    .querySelectorAll(
-      "a, button, .project, .service-card"
-    )
-    .forEach(element => {
-
-      element.addEventListener(
-        "mouseenter",
-        () => {
-
-          if (
-            element.classList.contains("project") ||
-            element.classList.contains("service-card") ||
-            element.classList.contains("intro-enter") ||
-            element.classList.contains("intro-skip")
-          ) {
-
-            cursor.classList.add("active");
-
-          }
-
-        }
-      );
-
-
-      element.addEventListener(
-        "mouseleave",
-        () => {
-
-          cursor.classList.remove("active");
-
-        }
-      );
-
-    });
-
-
-  /* SERVICE CARD MOVEMENT */
-
-  services.forEach(card => {
-
-    card.addEventListener(
-      "mousemove",
-      event => {
-
-        const rect =
-          card.getBoundingClientRect();
-
-
-        const x =
-          event.clientX - rect.left;
-
-        const y =
-          event.clientY - rect.top;
-
-
-        const rotateX =
-          ((y / rect.height) - .5) * -5;
-
-        const rotateY =
-          ((x / rect.width) - .5) * 5;
-
-
-        card.style.transform =
-          `perspective(900px)
-           rotateX(${rotateX}deg)
-           rotateY(${rotateY}deg)
-           translateY(-8px)
-           scale(1.012)`;
-
-      }
-    );
-
-
-    card.addEventListener(
-      "mouseleave",
-      () => {
-
-        card.style.transform = "";
-
-      }
-    );
-
+  image.addEventListener("load", () => {
+    image.classList.add("loaded");
   });
-
-
-  /* SCROLL PROGRESS */
-
-  function updateScrollProgress() {
-
-    const scrollTop =
-      window.scrollY;
-
-
-    const height =
-      document.documentElement.scrollHeight -
-      window.innerHeight;
-
-
-    const percentage =
-      height > 0
-        ? (scrollTop / height) * 100
-        : 0;
-
-
-    progress.style.width =
-      `${percentage}%`;
-
-  }
-
-
-  /* HEADER */
-
-  function updateHeader() {
-
-    if (window.scrollY > 40) {
-
-      header.classList.add("scrolled");
-
-    } else {
-
-      header.classList.remove("scrolled");
-
-    }
-
-  }
-
-
-  /* REVEAL */
-
-  const revealObserver =
-    new IntersectionObserver(
-
-      entries => {
-
-        entries.forEach(entry => {
-
-          if (entry.isIntersecting) {
-
-            entry.target.classList.add(
-              "visible"
-            );
-
-            revealObserver.unobserve(
-              entry.target
-            );
-
-          }
-
-        });
-
-      },
-
-      {
-        threshold: .12
-      }
-
-    );
-
-
-  revealElements.forEach(element => {
-
-    revealObserver.observe(element);
-
-  });
-
-
-  /* ACTIVE NAVIGATION */
-
-  const sections =
-    document.querySelectorAll(
-      "#work, #about, #contact"
-    );
-
-
-  const sectionObserver =
-    new IntersectionObserver(
-
-      entries => {
-
-        entries.forEach(entry => {
-
-          if (entry.isIntersecting) {
-
-            navLinks.forEach(link => {
-
-              link.classList.remove(
-                "active"
-              );
-
-            });
-
-
-            const active =
-              document.querySelector(
-                `.main-nav a[data-section="${entry.target.id}"]`
-              );
-
-
-            active?.classList.add(
-              "active"
-            );
-
-          }
-
-        });
-
-      },
-
-      {
-        rootMargin:
-          "-35% 0px -55% 0px"
-      }
-
-    );
-
-
-  sections.forEach(section => {
-
-    sectionObserver.observe(section);
-
-  });
-
-
-  /* SMOOTH SCROLL */
-
-  document
-    .querySelectorAll(
-      'a[href^="#"]'
-    )
-    .forEach(link => {
-
-      link.addEventListener(
-        "click",
-        event => {
-
-          const targetId =
-            link.getAttribute("href");
-
-
-          if (
-            !targetId ||
-            targetId === "#"
-          ) {
-
-            return;
-
-          }
-
-
-          const target =
-            document.querySelector(
-              targetId
-            );
-
-
-          if (!target) {
-            return;
-          }
-
-
-          event.preventDefault();
-
-
-          target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-        }
-      );
-
-    });
-
-
-  /* HERO PARALLAX */
-
-  const heroImage =
-    document.querySelector(
-      ".hero-image"
-    );
-
-
-  const heroTitle =
-    document.querySelector(
-      ".hero-title"
-    );
-
-
-  window.addEventListener(
-    "scroll",
-    () => {
-
-      const scroll =
-        window.scrollY;
-
-
-      if (
-        scroll <
-        window.innerHeight
-      ) {
-
-        heroImage.style.transform =
-          `scale(1.07)
-           translateY(${scroll * .08}px)`;
-
-
-        heroTitle.style.transform =
-          `translateY(${scroll * .035}px)`;
-
-      }
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  /* GLOBAL SCROLL */
-
-  window.addEventListener(
-    "scroll",
-    () => {
-
-      updateScrollProgress();
-
-      updateHeader();
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  updateScrollProgress();
-
-  updateHeader();
 
 });
