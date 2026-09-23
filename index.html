@@ -1,243 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta
-    name="description"
-    content="Ayomide Adegboro is a visual designer working across brand identity, creative direction and visual communication."
-  >
+  <title>Artivator | Visual Designer</title>
 
-  <title>Ayomide Adegboro | Visual Designer</title>
+  <link rel="preload" href="./Rugis.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="./Aquatico-Regular.otf" as="font" type="font/otf" crossorigin />
+  <link rel="preload" href="./Quera.otf" as="font" type="font/otf" crossorigin />
 
-  <link rel="preload" href="Rugis.ttf?v=9" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="Aquatico-Regular.otf?v=3" as="font" type="font/otf" crossorigin>
-  <link rel="preload" href="Quera.otf?v=2" as="font" type="font/otf" crossorigin>
-
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="./style.css" />
 </head>
 
-<body class="intro-active">
+<body>
 
   <!-- INTRO -->
 
   <div class="intro" id="intro">
-
+    <div class="intro-orb intro-orb-one"></div>
+    <div class="intro-orb intro-orb-two"></div>
+    <div class="intro-orb intro-orb-three"></div>
     <div class="intro-noise"></div>
 
-    <div class="intro-orb orb-one"></div>
-    <div class="intro-orb orb-two"></div>
-    <div class="intro-orb orb-three"></div>
-
     <div class="intro-top">
-      <span>AYOMIDE ADEGBORO</span>
-      <span>VISUAL DESIGNER</span>
+      <span>ARTIVATOR</span>
+      <span>PORTFOLIO / 2026</span>
     </div>
 
-    <div class="intro-stage">
-
-      <div class="intro-kicker">
-        <span>DESIGN / DIRECTION / COMMUNICATION</span>
+    <div class="intro-center">
+      <div class="intro-statements">
+        <span class="intro-line line-one">Ideas</span>
+        <span class="intro-line line-two">become</span>
+        <span class="intro-line line-three">visual.</span>
       </div>
 
-      <div class="intro-statement statement-one">
-        <span>Ideas</span>
+      <div class="intro-ring">
+        <span>ARTIVATOR • VISUAL DESIGN • ARTIVATOR • VISUAL DESIGN •</span>
       </div>
-
-      <div class="intro-statement statement-two">
-        <span>become</span>
-      </div>
-
-      <div class="intro-statement statement-three">
-        <span>visual.</span>
-      </div>
-
-      <div class="intro-ring"></div>
-
-      <div class="intro-glass">
-        <span>PORTFOLIO</span>
-        <span>2026</span>
-      </div>
-
     </div>
 
     <div class="intro-bottom">
-
-      <div class="intro-location">
-        LAGOS, NIGERIA
+      <div class="intro-glass">
+        <span>DESIGNER</span>
+        <span>LAGOS, NIGERIA</span>
+        <span>2023-2026</span>
       </div>
 
-      <button class="intro-enter" id="enterPortfolio">
-        <span>Enter</span>
-        <span>↗</span>
+      <button class="intro-enter" id="introEnter">
+        Enter portfolio <span>↗</span>
       </button>
 
-      <button class="intro-skip" id="skipIntro">
-        Skip intro
+      <button class="intro-skip" id="introSkip">
+        Skip intro <span>↗</span>
       </button>
-
     </div>
-
-    <div class="intro-progress"></div>
-
   </div>
 
 
   <!-- CURSOR -->
 
-  <div class="cursor">
-    <span>VIEW</span>
-  </div>
-
-
-  <!-- SCROLL PROGRESS -->
-
-  <div class="scroll-progress"></div>
+  <div class="cursor" id="cursor"></div>
 
 
   <!-- HEADER -->
 
   <header class="site-header">
+    <a href="#top" class="logo">ARTIVATOR®</a>
 
-    <a href="#top" class="brand">
-
-      <span class="portrait-frame">
-
-        <img
-          src="portrait.png?v=9"
-          alt="Ayomide Adegboro"
-          onerror="this.style.display='none'; this.parentElement.classList.add('portrait-fallback');"
-        >
-
-        <span class="portrait-initials">AA</span>
-
-      </span>
-
-      <span class="brand-name">
-        Ayomide Adegboro
-      </span>
-
-    </a>
-
-
-    <nav class="main-nav">
-
-      <a href="#work" data-section="work">
-        Work
-      </a>
-
-      <a href="#about" data-section="about">
-        About
-      </a>
-
-      <a href="#contact" data-section="contact">
-        Contact
-      </a>
-
+    <nav class="nav">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </nav>
 
-
-    <button
-      class="theme-toggle"
-      aria-label="Toggle colour mode"
-      type="button"
-    >
-      <span class="theme-icon">◌</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      ◐
     </button>
-
   </header>
 
 
   <main id="top">
 
-
     <!-- HERO -->
 
     <section class="hero">
 
-      <div class="hero-image"></div>
-
-      <div class="hero-colour"></div>
+      <div class="hero-background">
+        <img src="./hero.jpg" alt="" />
+      </div>
 
       <div class="hero-overlay"></div>
 
-      <div class="hero-glass glass-pill">
+      <div class="hero-topline">
         <span>VISUAL DESIGNER</span>
         <span>LAGOS / NIGERIA</span>
       </div>
 
-
       <div class="hero-content">
 
-        <div class="hero-title">
+        <p class="hero-kicker">CREATIVE DIRECTION / VISUAL COMMUNICATION</p>
 
-          <span class="outline-text">
-            Hi, I'm Ayomide
-          </span>
+        <h1 class="hero-title">
+          <span class="hero-outline">Hi, I'm</span>
+          <span class="hero-solid">Artivator</span>
+        </h1>
 
-          <span class="solid-text">
-            Hi, I'm Ayomide
-          </span>
-
-        </div>
-
-
-        <div class="hero-bottom">
-
-          <p class="hero-description">
-            I design brands, their experiences and the visual worlds they inhabit.
-          </p>
-
-          <a href="#work" class="scroll-link">
-
-            <span>
-              Scroll to explore
-            </span>
-
-            <span class="scroll-arrow">
-              ↓
-            </span>
-
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="hero-corner">
-        <span>SELECTED WORK</span>
-        <span>2023-2026</span>
-      </div>
-
-    </section>
-
-
-    <!-- INTRODUCTION -->
-
-    <section class="intro-section">
-
-      <div class="section-label">
-
-        <span>
-          Selected work
-        </span>
-
-        <span>
-          2023-2026
-        </span>
-
-      </div>
-
-
-      <div class="intro-copy reveal">
-
-        <p>
-          I work across identity, campaigns, digital experiences and visual systems,
-          helping ideas become clear, distinctive and memorable.
+        <p class="hero-description">
+          <span id="typewriterText"></span>
+          <span class="typewriter-cursor"></span>
         </p>
 
+        <a href="#work" class="hero-link">
+          Explore selected work <span>↘</span>
+        </a>
+
+      </div>
+
+      <div class="hero-bottom">
+        <span>2023-2026</span>
+        <span>SCROLL TO EXPLORE</span>
       </div>
 
     </section>
@@ -245,357 +128,212 @@
 
     <!-- WORK -->
 
-    <section class="work-section" id="work">
+    <section class="section work-section" id="work">
 
-      <div class="work-heading reveal">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">SELECTED WORK</span>
+          <h2>Things I've<br />helped shape.</h2>
+        </div>
 
-        <span>
-          Selected work
-        </span>
-
-        <span>
-          A collection of things I have made
-        </span>
-
+        <p>
+          A collection of identities, campaigns and digital experiences
+          created across different industries and ideas.
+        </p>
       </div>
 
 
       <div class="projects">
 
-
-        <a href="#" class="project reveal" data-project="scooler">
-
-          <div class="project-main">
-            <h2>Scooler AI</h2>
-
-            <p>
-              Brand identity · Digital · Creative direction
-            </p>
+        <a href="#" class="project project-large">
+          <div class="project-image">
+            <img src="./hero.jpg" alt="Scooler AI project" />
           </div>
 
-          <div class="project-year">
-            2026
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>Scooler</span>
-              <small>AI · Education</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">BRAND / DIGITAL</span>
+              <h3>Scooler AI</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="hexa">
-
-          <div class="project-main">
-            <h2>Hexa</h2>
-
-            <p>
-              Brand identity · Visual communication
-            </p>
+        <a href="#" class="project">
+          <div class="project-image project-image-purple">
+            <div class="project-placeholder">HEXA</div>
           </div>
 
-          <div class="project-year">
-            2026
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>Hexa</span>
-              <small>Identity system</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">BRAND IDENTITY</span>
+              <h3>Hexa</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="funtimes">
-
-          <div class="project-main">
-            <h2>FunTimes Magazine</h2>
-
-            <p>
-              Editorial · Art direction · Publication
-            </p>
+        <a href="#" class="project">
+          <div class="project-image project-image-dark">
+            <div class="project-placeholder">FUNTIMES</div>
           </div>
 
-          <div class="project-year">
-            2025
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>FunTimes</span>
-              <small>Editorial</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">EDITORIAL / BRAND</span>
+              <h3>FunTimes Magazine</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="ibquake">
-
-          <div class="project-main">
-            <h2>Ibquake</h2>
-
-            <p>
-              Brand identity · Campaign · Visuals
-            </p>
+        <a href="#" class="project project-large">
+          <div class="project-image project-image-pink">
+            <div class="project-placeholder">IBQUAKE</div>
           </div>
 
-          <div class="project-year">
-            2025
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>Ibquake</span>
-              <small>Celebrity - Campaign</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">CAMPAIGN / VISUALS</span>
+              <h3>Ibquake</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="allegra">
-
-          <div class="project-main">
-            <h2>Allegra</h2>
-
-            <p>
-              Brand identity · Digital · Strategy
-            </p>
+        <a href="#" class="project">
+          <div class="project-image project-image-neutral">
+            <div class="project-placeholder">ALLEGRA</div>
           </div>
 
-          <div class="project-year">
-            2025
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>Allegra</span>
-              <small>Real estate</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">BRAND / DIGITAL</span>
+              <h3>Allegra</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="modion">
-
-          <div class="project-main">
-            <h2>Modion Communications</h2>
-
-            <p>
-              Creative direction · Campaigns · Digital
-            </p>
+        <a href="#" class="project">
+          <div class="project-image project-image-blue">
+            <div class="project-placeholder">MODION</div>
           </div>
 
-          <div class="project-year">
-            2025
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>Modion</span>
-              <small>Communications</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">CREATIVE DIRECTION</span>
+              <h3>Modion Communications</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="weddn">
-
-          <div class="project-main">
-            <h2>Weddn</h2>
-
-            <p>
-              Brand identity · Product · Social
-            </p>
+        <a href="#" class="project project-large">
+          <div class="project-image project-image-red">
+            <div class="project-placeholder">WEDDN</div>
           </div>
 
-          <div class="project-year">
-            2025
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>Weddn</span>
-              <small>Digital wedding experience</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">BRAND / PRODUCT</span>
+              <h3>Weddn</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="isp">
-
-          <div class="project-main">
-            <h2>ISP Education</h2>
-
-            <p>
-              Brand communication · Campaigns · Social
-            </p>
+        <a href="#" class="project">
+          <div class="project-image project-image-green">
+            <div class="project-placeholder">ISP</div>
           </div>
 
-          <div class="project-year">
-            2025
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>ISP</span>
-              <small>Education</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">EDUCATION / DIGITAL</span>
+              <h3>ISP Education</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="cyclone">
-
-          <div class="project-main">
-            <h2>Cyclone Mag</h2>
-
-            <p>
-              Editorial identity · Digital · Art direction
-            </p>
+        <a href="#" class="project">
+          <div class="project-image project-image-black">
+            <div class="project-placeholder">CYCLONE</div>
           </div>
 
-          <div class="project-year">
-            2025
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>Cyclone</span>
-              <small>Media</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">EDITORIAL / MEDIA</span>
+              <h3>Cyclone Mag</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="opulence">
-
-          <div class="project-main">
-            <h2>Opulence</h2>
-
-            <p>
-              Identity · Campaign · Visual direction
-            </p>
+        <a href="#" class="project">
+          <div class="project-image project-image-gold">
+            <div class="project-placeholder">OPULENCE</div>
           </div>
 
-          <div class="project-year">
-            2024
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>Opulence</span>
-              <small>Luxury</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">BRAND IDENTITY</span>
+              <h3>Opulence</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="tax">
-
-          <div class="project-main">
-            <h2>National Tax Debate</h2>
-
-            <p>
-              Campaign · Communication · Art direction
-            </p>
+        <a href="#" class="project project-large">
+          <div class="project-image project-image-orange">
+            <div class="project-placeholder">NTD</div>
           </div>
 
-          <div class="project-year">
-            2024
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>NTDC</span>
-              <small>National Tax Debate</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">CAMPAIGN / DESIGN</span>
+              <h3>National Tax Debate</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
 
-        <a href="#" class="project reveal" data-project="mcsa">
-
-          <div class="project-main">
-            <h2>Mass Communication Students' Association</h2>
-
-            <p>
-              Brand communication · Events · Campaigns
-            </p>
+        <a href="#" class="project">
+          <div class="project-image project-image-wine">
+            <div class="project-placeholder">MCSA</div>
           </div>
 
-          <div class="project-year">
-            2023-2025
-          </div>
-
-          <div class="project-arrow">
-            ↗
-          </div>
-
-          <div class="project-preview">
-            <div class="preview-inner">
-              <span>MCSA</span>
-              <small>Student association</small>
+          <div class="project-info">
+            <div>
+              <span class="project-category">COMMUNICATION / BRAND</span>
+              <h3>Mass Communication Students' Association</h3>
             </div>
-          </div>
 
+            <span class="project-arrow">↗</span>
+          </div>
         </a>
 
       </div>
@@ -605,151 +343,81 @@
 
     <!-- SERVICES -->
 
-    <section class="statement-section">
+    <section class="section services-section" id="services">
 
-      <div class="section-label">
-
-        <span>
-          What I do
-        </span>
-
-        <span>
-          Strategy / Design / Direction
-        </span>
-
-      </div>
-
-
-      <div class="statement reveal">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">WHAT I DO</span>
+          <h2>Design with<br />intention.</h2>
+        </div>
 
         <p>
-          Strategy gives the idea direction. Design gives it a voice.
+          I work across strategy, identity and visual communication to turn
+          ideas into things people can see, feel and remember.
         </p>
-
       </div>
 
 
-      <div class="services">
+      <div class="services-grid">
 
+        <article class="service-card">
+          <span class="service-number">01</span>
 
-        <div class="service-card reveal">
-
-          <div class="service-number">
-            01
-          </div>
-
-          <div class="service-glow"></div>
-
-          <div class="service-content">
-
-            <span class="service-icon">✳</span>
-
-            <h3>
-              Brand identity
-            </h3>
-
+          <div>
+            <h3>Brand identity</h3>
             <p>
-              Visual identities that give brands a distinctive presence,
-              personality and system.
+              Building distinctive visual systems that give brands a clear
+              personality and a reason to be remembered.
             </p>
-
           </div>
 
-          <div class="service-arrow">
-            ↗
-          </div>
-
-        </div>
+          <span class="service-arrow">↗</span>
+        </article>
 
 
-        <div class="service-card reveal">
+        <article class="service-card">
+          <span class="service-number">02</span>
 
-          <div class="service-number">
-            02
-          </div>
-
-          <div class="service-glow"></div>
-
-          <div class="service-content">
-
-            <span class="service-icon">✦</span>
-
-            <h3>
-              Creative direction
-            </h3>
-
+          <div>
+            <h3>Creative direction</h3>
             <p>
-              Ideas, systems and visual worlds built around a clear
-              creative point of view.
+              Shaping the visual direction behind campaigns, brands and
+              experiences from the big idea to the smallest detail.
             </p>
-
           </div>
 
-          <div class="service-arrow">
-            ↗
-          </div>
-
-        </div>
+          <span class="service-arrow">↗</span>
+        </article>
 
 
-        <div class="service-card reveal">
+        <article class="service-card">
+          <span class="service-number">03</span>
 
-          <div class="service-number">
-            03
-          </div>
-
-          <div class="service-glow"></div>
-
-          <div class="service-content">
-
-            <span class="service-icon">◌</span>
-
-            <h3>
-              Visual communication
-            </h3>
-
+          <div>
+            <h3>Visual communication</h3>
             <p>
-              Design that makes information, campaigns and ideas
-              easier to understand.
+              Making complex ideas easier to understand through thoughtful
+              visual storytelling, editorial design and campaigns.
             </p>
-
           </div>
 
-          <div class="service-arrow">
-            ↗
-          </div>
-
-        </div>
+          <span class="service-arrow">↗</span>
+        </article>
 
 
-        <div class="service-card reveal">
+        <article class="service-card">
+          <span class="service-number">04</span>
 
-          <div class="service-number">
-            04
-          </div>
-
-          <div class="service-glow"></div>
-
-          <div class="service-content">
-
-            <span class="service-icon">↗</span>
-
-            <h3>
-              Digital design
-            </h3>
-
+          <div>
+            <h3>Digital design</h3>
             <p>
-              Digital experiences that feel considered, useful and
-              unmistakably theirs.
+              Designing digital experiences and interfaces that feel clear,
+              intentional and effortless to use.
             </p>
-
           </div>
 
-          <div class="service-arrow">
-            ↗
-          </div>
-
-        </div>
+          <span class="service-arrow">↗</span>
+        </article>
 
       </div>
 
@@ -758,54 +426,30 @@
 
     <!-- ABOUT -->
 
-    <section class="about-section" id="about">
+    <section class="section about-section" id="about">
 
-      <div class="section-label">
-
-        <span>
-          About
-        </span>
-
-        <span>
-          The person behind the pixels
-        </span>
-
-      </div>
-
-
-      <div class="about-layout">
-
-        <div class="about-title reveal">
-
-          <h2>
-            Designer.<br>
-            Creative thinker.<br>
-            Builder.
-          </h2>
-
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ABOUT</span>
+          <h2>A designer<br />with curiosity.</h2>
         </div>
 
-
-        <div class="about-copy reveal">
-
-          <p class="large-copy">
-            I'm Ayomide Adegboro, a visual designer interested in the space
-            between strategy, branding and design.
+        <div class="about-copy">
+          <p>
+            I'm Ayomide Adegboro, a visual designer and creative director
+            based in Lagos, Nigeria.
           </p>
 
           <p>
-            My work moves between brand identity, creative direction,
-            digital design and visual communication. I like taking an idea
-            that feels complicated and finding the visual language that
-            makes it feel obvious.
+            I enjoy finding the visual language hidden inside an idea and
+            turning it into something clear, expressive and memorable.
           </p>
 
           <p>
-            Based in Lagos, Nigeria. Working across brands, people and ideas.
+            My work sits somewhere between design, communication, culture
+            and technology.
           </p>
-
         </div>
-
       </div>
 
     </section>
@@ -815,45 +459,36 @@
 
     <section class="contact-section" id="contact">
 
-      <div class="section-label">
+      <div class="contact-inner">
 
-        <span>
-          Contact
-        </span>
+        <span class="eyebrow">LET'S TALK</span>
 
-        <span>
-          Let's make something
-        </span>
-
-      </div>
-
-
-      <div class="contact-content reveal">
-
-        <p>
-          Have an idea?
-        </p>
+        <h2>Let's make it<br /><span>real.</span></h2>
 
         <a
-          href="mailto:hello@ayomideadegboro.com"
+          href="mailto:ayomideadegboro116@gmail.com"
           class="contact-email"
+          id="contactEmail"
         >
-          Let's make it real.
+          ayomideadegboro116@gmail.com
         </a>
 
+        <div class="social-links">
 
-        <div class="contact-meta">
-
-          <a href="mailto:hello@ayomideadegboro.com">
-            Email
+          <a
+            href="http://instagram.com/artivator_/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram <span>↗</span>
           </a>
 
-          <a href="#" target="_blank">
-            Instagram
-          </a>
-
-          <a href="#" target="_blank">
-            LinkedIn
+          <a
+            href="https://www.linkedin.com/in/ayomide-adegboro-35426b227/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn <span>↗</span>
           </a>
 
         </div>
@@ -865,24 +500,20 @@
   </main>
 
 
+  <!-- FOOTER -->
+
   <footer class="site-footer">
 
-    <span>
-      © 2026 Ayomide Adegboro
-    </span>
+    <span>ARTIVATOR®</span>
 
-    <span>
-      Designed & built by ADEGBORO
-    </span>
+    <span>VISUAL DESIGNER / CREATIVE DIRECTOR</span>
 
-    <a href="#top">
-      Back to top ↑
-    </a>
+    <span>© 2026</span>
 
   </footer>
 
 
-  <script src="script.js?v=9"></script>
+  <script src="./script.js"></script>
 
 </body>
 </html>
