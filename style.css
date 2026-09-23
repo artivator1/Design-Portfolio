@@ -885,7 +885,7 @@ button {
 }
 
 
-/* LIGHT MODE HERO CONTRAST */
+/* LIGHT MODE HERO */
 
 body.light .hero {
   color: #ffffff;
@@ -1471,46 +1471,6 @@ body.light .service-card {
 }
 
 
-.about-photo-card {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 230px;
-  height: 300px;
-  padding: 7px;
-  z-index: 5;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 28px;
-  background: rgba(255,255,255,.08);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.18);
-  transform: translate(120vw,-50%) rotate(8deg);
-  opacity: 0;
-  transition:
-    transform 1.2s cubic-bezier(.16,1,.3,1),
-    opacity .8s ease;
-}
-
-
-.about-photo-card img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  border-radius: 22px;
-}
-
-
-.about-photo-card.visible {
-  opacity: 1;
-  transform: translate(-50%,-50%) rotate(0deg);
-}
-
-
 .about-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1548,6 +1508,66 @@ body.light .service-card {
   font-size: clamp(25px, 2.5vw, 38px);
   line-height: 1.12;
   letter-spacing: .015em;
+}
+
+
+/* PROFILE CARD */
+
+.about-photo-card {
+  position: relative;
+  left: auto;
+  top: auto;
+
+  width: 230px;
+  height: 300px;
+
+  margin-top: 10px;
+
+  padding: 7px;
+
+  z-index: 1;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 28px;
+
+  background: rgba(255,255,255,.08);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.18);
+
+  opacity: 0;
+  transform: translateX(120px) rotate(6deg);
+
+  transition:
+    transform 1.1s cubic-bezier(.16,1,.3,1),
+    opacity .8s ease;
+}
+
+
+.about-copy.visible .about-photo-card {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+
+.about-photo-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+
+body.light .about-photo-card {
+  background: rgba(255,255,255,.42);
+  border-color: rgba(0,0,0,.12);
 }
 
 
@@ -1806,6 +1826,26 @@ body.light .service-card {
   }
 
 
+  body.light .hero-image {
+    filter:
+      blur(5px)
+      brightness(.38)
+      saturate(.75);
+  }
+
+
+  body.light .hero-overlay {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0,0,0,.82),
+        rgba(0,0,0,.55) 40%,
+        rgba(0,0,0,.64) 68%,
+        rgba(0,0,0,.9)
+      );
+  }
+
+
   .intro-section,
   .work-section,
   .statement-section,
@@ -1895,18 +1935,6 @@ body.light .service-card {
   }
 
 
-  .about-photo-card {
-    width: 170px;
-    height: 230px;
-    border-radius: 22px;
-  }
-
-
-  .about-photo-card img {
-    border-radius: 17px;
-  }
-
-
   .about-layout {
     grid-template-columns: 1fr;
     gap: 80px;
@@ -1916,6 +1944,19 @@ body.light .service-card {
 
   .about-title h2 {
     font-size: 65px;
+  }
+
+
+  .about-photo-card {
+    width: 170px;
+    height: 230px;
+    border-radius: 22px;
+    margin-top: 5px;
+  }
+
+
+  .about-photo-card img {
+    border-radius: 17px;
   }
 
 
@@ -1934,26 +1975,6 @@ body.light .service-card {
     padding: 20px;
     flex-direction: column;
     gap: 10px;
-  }
-
-
-  body.light .hero-image {
-    filter:
-      blur(5px)
-      brightness(.38)
-      saturate(.75);
-  }
-
-
-  body.light .hero-overlay {
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(0,0,0,.82),
-        rgba(0,0,0,.55) 40%,
-        rgba(0,0,0,.64) 68%,
-        rgba(0,0,0,.9)
-      );
   }
 
 }
