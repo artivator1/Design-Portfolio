@@ -1101,9 +1101,7 @@ button {
 
 .project-arrow {
   font-size: 25px;
-  transition:
-    transform .4s ease,
-    color .45s ease;
+  transition: transform .4s ease;
 }
 
 
@@ -1178,6 +1176,10 @@ button {
   background: #8290ff;
 }
 
+.project[data-project="opulence"]::before {
+  background: #ffa547;
+}
+
 .project[data-project="mcsa"]::before {
   background: #ff8a00;
 }
@@ -1193,6 +1195,7 @@ button {
 .project[data-project="isp"]:hover,
 .project[data-project="cyclone"]:hover,
 .project[data-project="tax"]:hover,
+.project[data-project="opulence"]:hover,
 .project[data-project="mcsa"]:hover {
   color: white;
 }
